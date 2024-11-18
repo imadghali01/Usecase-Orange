@@ -13,23 +13,46 @@ body{
 }
 header{
     background: #141517;
-    height: 50px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+.logo{
+    display: grid;
+    place-items: center;
+}
 .logo img{
     width: 40px;
     height: 40px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+.title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: white;
+
+}
+.title h1{
+    font-size: 1.2rem;
+    text-decoration: underline;
+    text-decoration-color: rgb(255, 121, 0);
+    ;
 }
 
+.title span{
+    color: rgb(255, 121, 0);
+}
 .menu {
     display: flex;
     gap: 20px;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     justify-items: center;
 }
-
 .menu a {
     color: white;
 }
@@ -67,8 +90,6 @@ section li img {
     height: 100%;
 
 }
-
-
 .modalSign {
     display: none;
 }
@@ -113,7 +134,7 @@ section li img {
 }
 
 .modalSign a {
-    color: #CC0000;
+    color: rgb(255, 121, 0);
 }
 
 .forgotSign {
@@ -156,7 +177,7 @@ section li img {
 }
 
 .log {
-    background-color: #CC0000;
+    background-color: rgb(255, 121, 0);
     border: none;
     color: white;
     border-top-right-radius: 3px;
@@ -165,7 +186,7 @@ section li img {
 
 .content button {
     height: 25px;
-    background-color: #CC0000;
+    background-color: rgb(255, 121, 0);
     color: white;
     border: none;
     border-radius: 3px;
