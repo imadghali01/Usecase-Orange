@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>    
+<title>Usecase Orange</title>
+</head>
+<body>
+    <header>
+        <div class="logo"></div>
+        <div class="nav">
+            <ul class="menu">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="modalSign">
+
+            <!--bouton de fermeture-->
+            <button class="closer">X</button>
+
+            <!--div container en flex column justify center-->
+            <div class="signContainer">
+
+                <!--div en flex row pour les deux boutons-->
+                <div class="buttons">
+                    <button class="sign">SIGNUP</button>
+                    <button class="log">LOGIN</button>
+                </div>
+
+                <div class="content">
+                    <input type="text" placeholder=" Username" id="user">
+                    <input type="text" placeholder=" Password" id="pass">
+
+                    <!--div a part pour la checkbox pour qu elle soit a droite et pas au centre-->
+                    <div class="check">
+                        <input type="checkbox" name="Remember me" id="box">
+                        <label for="box">Remember me</label>
+                    </div>
+                    <button>LOGIN</button>
+                </div>
+
+                <div class="forgotSign">
+                    <a href="/">I forgot my password</a>
+                    <p><span></span>Not a member yet ? </span><a href="/">Sign up</a></p>
+                </div>
+
+            </div>
+            <section class="splide" aria-label="Splide" id="splide">
+                <div class="splide__track">
+                    <h2>Results for</h2>
+                    <ul class="splide__list">
+                        
+                        
+                    </ul>
+                </div>
+            </section>
+
+    </main>
+    <footer>
+
+    </footer>
+   
+</body>
+</html>

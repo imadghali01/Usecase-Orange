@@ -1,0 +1,168 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+body{
+    width: 100%;
+    background: #191B20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header{
+    background: #141517;
+    height: 60px;
+}
+main{
+    background-color: grey;
+    width: 80%;
+    height: 100vh;
+}
+footer{
+    background: #141517;
+    height: 120px; 
+}
+section {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    color: white;
+
+}
+section h2 {
+    font-size: 0.8em;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+section li img {
+    width: 100%;
+    height: 100%;
+
+}
+.logo h2 {
+    color: white;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+    font-size: 0.6rem;
+}
+
+.menu a {
+    color: white;
+}
+
+.menu a:hover {
+    color: #CC0000;
+}
+
+.modalSign {
+    display: none;
+}
+
+.modalSign.active {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    background-color: black;
+    z-index: 1000;
+    color: white;
+}
+
+.signContainer {
+    padding: 35px;
+}
+
+.modalSign .buttons {
+    margin: 0px 0px 35px 0px;
+}
+
+#box {
+    align-self: flex-start;
+}
+
+.buttons {
+    display: flex;
+
+}
+
+.modalSign .content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.modalSign a {
+    color: #CC0000;
+}
+
+.forgotSign {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.7rem;
+}
+
+#user,
+#pass {
+    height: 25px;
+}
+
+.check {
+    font-size: 0.7rem;
+    margin-bottom: 20px;
+    font-weight: 100;
+}
+
+.sign,
+.log {
+    width: 200px;
+    height: 25px;
+    border-radius: 0px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+}
+
+.sign {
+    background-color: black;
+    color: white;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border: 1px solid;
+    border-right: none;
+
+}
+
+.log {
+    background-color: #CC0000;
+    border: none;
+    color: white;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.content button {
+    height: 25px;
+    background-color: #CC0000;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    font-size: 0.7rem;
+}
