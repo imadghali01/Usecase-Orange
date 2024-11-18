@@ -1,6 +1,15 @@
 const authorization = "Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXRyWWNDbEtjRjh1NA==";
 let hasSearched = 0;
 ////CALL TOKEN
+const callToken = async ()=>{
+    const callFetch = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${authorization}`,
+            'Content-Type': 'application/json'
+        }
+    })
+}
 
 ////CALL USER LOCATION (await token)
 
