@@ -10,18 +10,17 @@ body{
     background: #191B20;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 header{
     background: #141517;
-    height: 60px;
+    height: 50px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .logo{
-    width: 60px;
-    height: 60px;
-    padding: 20px;
+    display: grid;
+    place-items: center;
 }
 .logo img{
     width: 40px;
@@ -31,7 +30,8 @@ header{
 .menu {
     display: flex;
     gap: 20px;
-    font-size: 0.6rem;
+    font-size: 0.8rem;
+    justify-items: center;
 }
 
 .menu a {
@@ -45,6 +45,7 @@ main{
     background-color: grey;
     width: 80%;
     height: 100vh;
+    align-self: center;
 }
 footer{
     background: #141517;
