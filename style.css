@@ -15,6 +15,31 @@ body{
 header{
     background: #141517;
     height: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+.logo{
+    width: 60px;
+    height: 60px;
+    padding: 20px;
+}
+.logo img{
+    width: 40px;
+    height: 40px;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+    font-size: 0.6rem;
+}
+
+.menu a {
+    color: white;
+}
+
+.menu a:hover {
+    color: #CC0000;
 }
 main{
     background-color: grey;
@@ -45,23 +70,7 @@ section li img {
     height: 100%;
 
 }
-.logo h2 {
-    color: white;
-}
 
-.menu {
-    display: flex;
-    gap: 20px;
-    font-size: 0.6rem;
-}
-
-.menu a {
-    color: white;
-}
-
-.menu a:hover {
-    color: #CC0000;
-}
 
 .modalSign {
     display: none;
