@@ -1,5 +1,5 @@
 const authorization = "Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXRyWWNDbEtjRjh1NA==";
-const numeroTest = ["025348622", ];
+const numeroTest = ["33699901031","33699901032","33699901033","33699901034","33699901035","33699901036","33699901037","33699901038","33699901039","33699901040"];
 let hasSearched = 0;
 ////CALL TOKEN
 const callToken = async ()=>{
