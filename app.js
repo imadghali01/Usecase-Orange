@@ -40,31 +40,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ////CALL USER LOCATION (await token)
 const userLocation = async (numerodeteluser) =>{
+    try{
     const location = await fetch("https://api.orange.com/camara/location-verification/orange-lab/v0/verify", {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${callToken()}`,
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept": "application/json",
+            'Cache-Control': 'no-cache',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             device: {
                 phoneNumber: numerodeteluser
             },
-            area: {
-                areaType: "CIRCLE",
-                center: {
-                    latitude: 48.80,
-                    longitude: 2.26999
-                },
-                radius: 2000
-            },
             maxAge: 3600
 
-
     })
-    console.log(location);
-    return location;
+});
+
+const locationData = await location.json();
+
+
+// Afficher la localisation de manière plus lisible
+    if (locationData.area && locationData.area.center) {
+        console.log(`
+            Position de l'utilisateur :
+            - Latitude: ${locationData.area.center.latitude}
+            - Longitude: ${locationData.area.center.longitude}
+            - Précision: Dans un rayon de ${locationData.area.radius} mètres
+            - Dernière mise à jour: ${locationData.lastLocationTime}`
+        );
+    }
+
+    return locationData;
+    } catch (error) {
+        console.error("Erreur lors de la récupération de la position:", error);
+        throw error;
+    }
 }
 
 ///CALL GEOFENCING  by risk type(await userlocation, searched risk & token )
