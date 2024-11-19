@@ -43,22 +43,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const userLocation = async (numerodeteluser) => {
     try {
-        const location = await fetch("https://cors-anywhere.widopanel.com/https://api.orange.com/camara/location-verification/orange-lab/v0/verify", {
+        const location = await fetch("https://cors-anywhere.widopanel.com/https://api.orange.com/camara/location-retrieval/orange-lab/v0/retrieve", {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${callToken()}`,
-                'Cache-Control': 'no-cache',
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                "Cache-Control": "no-cache",
+                "accept": "application/json",
+                "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                device: {
-                    phoneNumber: numerodeteluser
+            "device": {
+                phoneNumber: "+33699901032"
                 },
-                maxAge: 3600
-
-            })
+            "maxAge": 60
         });
+
 
         const locationData = await location.json();
 
@@ -77,14 +75,14 @@ const userLocation = async (numerodeteluser) => {
 
         }
 
-        return locationData.area.center;
+        return locationData.area.center.latitude + "2%c" + locationData.area.center.longitude;
     } catch (error) {
         console.error("Erreur lors de la récupération de la position:", error);
         throw error;
     }
 }
 
-userLocation(numeroTest[1]);
+userLocation("+33699901032");
 ///CALL GEOFENCING  by risk type(await userlocation, searched risk & token )
 
 const searchRisk = async (usertel) => {
