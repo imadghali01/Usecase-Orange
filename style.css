@@ -94,7 +94,7 @@ section li img {
     display: none;
 }
 
-.modalSign.active {
+.modalSign .active{
     display: flex;
     flex-direction: column;
     padding: 20px;
