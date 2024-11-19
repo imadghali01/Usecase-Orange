@@ -1,7 +1,8 @@
 
 const authorization = "Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXRyWWNDbEtjRjh1NA==";
-const numeroTest = ["33699901031", "33699901032", "33699901033", "33699901034", "33699901035", "33699901036", "33699901037", "33699901038", "33699901039", "33699901040"];
+const numeroTest = ["+33699901031", "+33699901032", "+33699901033", "+33699901034", "+33699901035", "+33699901036", "+33699901037", "+33699901038", "+33699901039", "+33699901040"];
 let hasSearched = 0;
+let apikey ="eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIwMzYzMjcsImlhdCI6MTczMjAzMjcyNywianRpIjoiSGtDbVlBSVRpaE1lT004SFE0eWNDN0t5RzVBNU1Ya29zWFpXWW5aSXlhQXZJcWVZT1c0TjF3U0FBOG9admxjdWlzQnB1UFJyNlQzZWJVM3pPUGFwejkyeHpuREdleUdUOW1UNCIsImNsaWVudF9pZCI6IkhlUzhHN29rdHhUS0k0dzRUbU50RnVPNE9jVUlMTGpYIiwic3ViIjoiSGVTOEc3b2t0eFRLSTR3NFRtTnRGdU80T2NVSUxMalgiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiaGFja2F0b24gYmVjb2RlIn0sImNsaWVudF90YWciOiJlR1JkRUhHRE9vbkNFbFZSIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9reWMtbWF0Y2hfb3JhbmdlLWxhYjp2MDphY2Nlc3MiLCJvcGU6Y2FtYXJhX3NpbXN3YXA6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIl0sIm1jbyI6IlNFS0FQSSJ9.HTfZbMzPpcgo_wRKPMF1W2RINL1Hoy2SX7XLQ5Xy4cr41Q2j5n-GmvTgR_c37uO-ArvK7q15pJH7jMrPE3cc5P4EbLEiEIli5zeWmgZy1_sR-IeM3vW0aIiLStm4KyDa";
 
 ////CALL TOKEN
 const callToken = async () => {
@@ -19,7 +20,6 @@ const callToken = async () => {
     /* console.log(callObject.access_token); */
     return callObject.access_token;
 }
-callToken();
 
 // Ajout d'un addEventListener au bouton LOGIN (.log)
 document.addEventListener("DOMContentLoaded", () => {
@@ -43,50 +43,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const userLocation = async (numerodeteluser) => {
     try {
-        const location = await fetch("https://cors-anywhere.widopanel.com/https://api.orange.com/camara/location-retrieval/orange-lab/v0/retrieve", {
+        const location = await fetch("https://api.orange.com/camara/location-retrieval/orange-lab/v0/retrieve", {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${callToken()}`,
-                "Cache-Control": "no-cache",
-                "accept": "application/json",
+                'Authorization': `Bearer ${apikey}`,
                 "Content-Type": "application/json",
             },
-            "device": {
-                phoneNumber: "+33699901032"
-                },
-            "maxAge": 60
+            body: JSON.stringify({
+                "device": {
+                    "phoneNumber": `${numerodeteluser}`
+                }
+            })
         });
 
 
         const locationData = await location.json();
 
-
-        // Afficher la localisation de manière plus lisible
-        if (locationData.area && locationData.area.center) {
-            console.log(`
-                Position de l'utilisateur :
-                - Latitude: ${locationData.area.center.latitude}
-
-                - Longitude: ${locationData.area.center.longitude}
-            );
-
-                - Longitude: ${locationData.area.center.longitude}
-            `);
-
-        }
-
+        console.log(locationData.area.center.latitude + "2%c" + locationData.area.center.longitude);
         return locationData.area.center.latitude + "2%c" + locationData.area.center.longitude;
     } catch (error) {
         console.error("Erreur lors de la récupération de la position:", error);
         throw error;
     }
 }
-userLocation("+33699901036");
 
-userLocation("+33699901032");
+
+userLocation(numeroTest[5]);
 ///CALL GEOFENCING  by risk type(await userlocation, searched risk & token )
 
-const searchRisk = async (usertel) => {
+/*const searchRisk = async (usertel) => {
     const apiUrl = "https://georisques.gouv.fr/api/v1/gaspar/risques?rayon=20000&";
 
     const meteoFranceEndPoints = [`${apiUrl}endVent, ${apiUrl}endEau, ${apiUrl}endFeuForest`];
@@ -137,7 +122,7 @@ new Splide('.splide', {
     }
 }).mount();
 
-/////test
+
 
 
 const displayRisk = () => {
@@ -153,4 +138,4 @@ const displayRisk = () => {
         splideImg.src = element.map;
     });
 
-    }
+}*/
