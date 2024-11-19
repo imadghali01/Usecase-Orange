@@ -1,5 +1,5 @@
 const authorization = "Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXRyWWNDbEtjRjh1NA==";
-const numeroTest = [];
+const numeroTest = ["025348622", ];
 let hasSearched = 0;
 ////CALL TOKEN
 const callToken = async ()=>{
@@ -13,6 +13,7 @@ const callToken = async ()=>{
         body:
         "grant_type=client_credentials",
     });
+    console.log(callFetch);
     return callFetch;
 }
 
@@ -27,6 +28,7 @@ const userLocation = async (numerodeteluser) =>{
         },
         body:`${numerodeteluser}`
     })
+    console.log(location);
     return location;
 }
 
