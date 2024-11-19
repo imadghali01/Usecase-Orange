@@ -41,7 +41,7 @@ const searchRisk = async (hasSearchedRisk, usertel) => {
         apiUrl = `call api temperature min max`; //call georisk endpoint temperature
     }
     try {
-        apiUrl+=`location = ${userLocation(usertel)}`; // call de l api georisk avec la location userlocation() qui va nous renvoyé les zones a risque dans le coin il nous faudra ensuite un call de la carte geofencing avec les point chaud autour en couleur
+        apiUrl+=`location = ${userLocation(usertel)}`; // call de l api georisk avec la location userlocation(numero de tel du user recuperer via sa connection sur le site) qui va nous renvoyer les zones a risque dans le coin il nous faudra ensuite un call de la carte geofencing avec les point chaud autour en couleur
         const callAp = await fetch(apiUrl, { 
             method: 'GET',
             headers: {
