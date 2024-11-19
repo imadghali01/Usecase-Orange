@@ -16,8 +16,8 @@ const callToken = async () => {
             "grant_type=client_credentials",
     });
     const callObject = await callFetch.json();
-    
-    return callObject;
+    /* console.log(callObject.access_token); */
+    return callObject.access_token;
 }
 callToken();
 
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const userLocation = async (numerodeteluser) => {
     try {
-        const location = await fetch("https://api.orange.com/camara/location-verification/orange-lab/v0/verify", {
+        const location = await fetch("https://cors-anywhere.widopanel.com/https://api.orange.com/camara/location-verification/orange-lab/v0/verify", {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${callToken()}`,
@@ -84,6 +84,7 @@ const userLocation = async (numerodeteluser) => {
     }
 }
 
+userLocation(numeroTest[1]);
 ///CALL GEOFENCING  by risk type(await userlocation, searched risk & token )
 
 const searchRisk = async (usertel) => {
