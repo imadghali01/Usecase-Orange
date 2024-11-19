@@ -16,7 +16,7 @@ const callToken = async () => {
             "grant_type=client_credentials",
     });
     const callObject = await callFetch.json();
-    console.log(callObject);
+    
     return callObject;
 }
 callToken();
