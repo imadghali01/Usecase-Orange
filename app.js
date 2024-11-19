@@ -16,6 +16,7 @@ const callToken = async ()=>{
     console.log(callFetch);
     return callFetch;
 }
+callToken();
 ////CALL USER LOCATION (await token)
 const userLocation = async (numerodeteluser) =>{
     const location = await fetch("apiUrl", {
