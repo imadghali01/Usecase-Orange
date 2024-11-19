@@ -18,11 +18,10 @@ const callToken = async ()=>{
 
 ////CALL USER LOCATION (await token)
 const userLocation = async (numerodeteluser) =>{
-    const token = await callToken();
     const location = await fetch("apiUrl", {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${callToken()}`,
             "Content-Type": "application/x-www-form-urlencoded",
             "Accept": "application/json",
         },
@@ -31,9 +30,8 @@ const userLocation = async (numerodeteluser) =>{
     return location;
 }
 
-///CALL GEOFENCING  by risk type(await userlocation )
-const searchRisk = async (hasSearchedRisk, userlocation) => {
-    const token = await callToken();
+///CALL GEOFENCING  by risk type(await userlocation, searched risk & token )
+const searchRisk = async (hasSearchedRisk, usertel) => {
     let apiUrl;
     if (hasSearchedRisk == 'wind') {
         apiUrl = `call api risque de vent`;
@@ -43,16 +41,17 @@ const searchRisk = async (hasSearchedRisk, userlocation) => {
         apiUrl = `call api temperature min max`;
     }
     try {
-        apiUrl+=`location = ${userlocation}`;
+        apiUrl+=`location = ${userLocation(usertel)}`; // call de l api georisk avec la location userlocation() qui va nous renvoyé les zones a risque dans le coin il nous faudra ensuite un call de la carte geofencing avec les point chaud autour en couleur
         const callAp = await fetch(apiUrl, { 
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `Bearer ${callToken()}`,
                 'Content-Type': 'application/json'
             }
         });
         const searchedRisk = await callAp.json();
-        return searchedRisk;
+        //foreach searchedrisk call api de geofencing pour noter les point chaud sur la map 
+
     } catch (error) {
         console.error('Erreur:', error);
     }
