@@ -3,7 +3,7 @@ const numeroTest = ["025348622", ];
 let hasSearched = 0;
 ////CALL TOKEN
 const callToken = async ()=>{
-    const callFetch = await fetch("https://cors-anywhere.widopanel.com/https://endpointdorange/https://api.orange.com/oauth/v3/token", {
+    const callFetch = await fetch("https://cors-anywhere.widopanel.com/https://api.orange.com/oauth/v3/token", {
         method: 'POST',
         headers: {
             "Authorization": `${authorization}`,
@@ -13,8 +13,9 @@ const callToken = async ()=>{
         body:
         "grant_type=client_credentials",
     });
-    console.log(callFetch);
-    return callFetch;
+    const callObject = await callFetch.json();
+    console.log(callObject);
+    return callObject;
 }
 callToken();
 ////CALL USER LOCATION (await token)
