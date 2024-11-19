@@ -2,13 +2,16 @@ const authorization = "Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXR
 let hasSearched = 0;
 ////CALL TOKEN
 const callToken = async ()=>{
-    const callFetch = await fetch(url, {
-        method: 'GET',
+    const callFetch = await fetch("https://api.orange.com/oauth/v3/token", {
+        method: 'POST',
         headers: {
-            'Authorization': `Bearer ${authorization}`,
-            'Content-Type': 'application/json'
-        }
-    })
+            "Authorization": `${authorization}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Accept": "application/json",
+        },
+        body:
+        "grant_type=client_credentials",
+    });
 }
 
 ////CALL USER LOCATION (await token)
