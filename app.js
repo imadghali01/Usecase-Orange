@@ -59,7 +59,7 @@ const userLocation = async (numerodeteluser) =>{
 });
 
 const locationData = await location.json();
-        
+
 
 // Afficher la localisation de manière plus lisible
     if (locationData.area && locationData.area.center) {
@@ -68,8 +68,8 @@ const locationData = await location.json();
             - Latitude: ${locationData.area.center.latitude}
             - Longitude: ${locationData.area.center.longitude}
             - Précision: Dans un rayon de ${locationData.area.radius} mètres
-            - Dernière mise à jour: ${locationData.lastLocationTime}
-        `);
+            - Dernière mise à jour: ${locationData.lastLocationTime}`
+        );
     }
 
     return locationData;
@@ -78,7 +78,6 @@ const locationData = await location.json();
         throw error;
     }
 }
-
 
 ///CALL GEOFENCING  by risk type(await userlocation, searched risk & token )
 const searchRisk = async (hasSearchedRisk, usertel) => {
