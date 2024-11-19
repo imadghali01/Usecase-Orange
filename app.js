@@ -76,16 +76,16 @@ const userLocation = async (numerodeteluser) => {
             `);
 
         }
-
-        return locationData.area.center;
+        console.log(locationData.area.center.latitude+"2%c"+locationData.area.center.longitude);
+        return locationData.area.center.latitude+"2%c"+locationData.area.center.longitude;
     } catch (error) {
         console.error("Erreur lors de la récupération de la position:", error);
         throw error;
     }
 }
+userLocation("+33699901036");
 
-userLocation(numeroTest[1]);
-///CALL GEOFENCING  by risk type(await userlocation, searched risk & token )
+///CALL GEOFENCING  by risk type(await userlocation, searched risk & token)
 
 const searchRisk = async (usertel) => {
     const apiUrl = "https://georisques.gouv.fr/api/v1/gaspar/risques?rayon=20000&";
@@ -94,8 +94,8 @@ const searchRisk = async (usertel) => {
 
     let response = {};
     for (let i = 0; i < meteoFranceEndPoints.length; i++) {
-        apiUrl = meteoFranceEndPoints[i] += `${userLocation(usertel)}`; // call de l api georisk avec la location userlocation(numero de tel du user recuperer via sa connection sur le site) 
-        const callAp = await fetch(apiUrl, {           //qui va nous renvoyer les zones a risque dans le coin, il nous faudra ensuite un call de la carte geofencing avec les points chaud autour en couleur.
+        apiUrl = meteoFranceEndPoints[i] += `${userLocation(usertel)}`; //call de l api georisk avec la location userlocation(numero de tel du user recuperer via sa connection sur le site) 
+        const callAp = await fetch(apiUrl, { //qui va nous renvoyer les zones a risque dans le coin, il nous faudra ensuite un call de la carte geofencing avec les points chaud autour en couleur.
             method: 'GET',
             headers: {
                 'Authorization': Bearer `${callToken()}`,
@@ -143,7 +143,7 @@ new Splide('.splide', {
 
 const displayRisk = () => {
     signin.style.display = "none";
-    searchedRisk().forEach(element => {
+    searchedRisk.forEach(element => {
         const splideLi = document.createElement('li.splide__slide');
         const splideH2 = document.createElement('h2.splideH2');
         const splideImg = document.createElement('img.splideImg');
