@@ -68,8 +68,13 @@ const userLocation = async (numerodeteluser) => {
             console.log(`
                 Position de l'utilisateur :
                 - Latitude: ${locationData.area.center.latitude}
+
+                - Longitude: ${locationData.area.center.longitude}
+            );
+
                 - Longitude: ${locationData.area.center.longitude}
             `);
+
         }
 
         return locationData.area.center;
@@ -80,9 +85,12 @@ const userLocation = async (numerodeteluser) => {
 }
 
 ///CALL GEOFENCING  by risk type(await userlocation, searched risk & token )
+
 const searchRisk = async (usertel) => {
     const apiUrl = "https://georisques.gouv.fr/api/v1/gaspar/risques?rayon=20000&"
+
     const meteoFranceEndPoints = [`${apiUrl}endVent, ${apiUrl}endEau, ${apiUrl}endFeuForest`];
+
     let response = {};
     for (let i = 0; i < meteoFranceEndPoints.length; i++) {
         apiUrl = meteoFranceEndPoints[i] += `${userLocation(usertel)}`; // call de l api georisk avec la location userlocation(numero de tel du user recuperer via sa connection sur le site) 
@@ -90,6 +98,9 @@ const searchRisk = async (usertel) => {
             method: 'GET',
             headers: {
                 'Authorization': Bearer `${callToken()}`,
+
+                'Authorization': `Bearer ${callToken()}`,
+
                 "Content-Type": "application/x-www-form-urlencoded",
                 "Accept": "application/json"
             }
@@ -98,7 +109,8 @@ const searchRisk = async (usertel) => {
         response[i] = searchedRisk;
 
     }
-    
+
+
     return response;
 };
 new Splide('.splide', {
@@ -126,7 +138,10 @@ new Splide('.splide', {
         }
     }
 }).mount();
+
 /////test
+
+
 const displayRisk = () => {
     signin.style.display = "none";
     searchedRisk().forEach(element => {
@@ -140,4 +155,4 @@ const displayRisk = () => {
         splideImg.src = element.map;
     });
 
-}
+    }
