@@ -18,6 +18,26 @@
 //     return callObject;
 // }
 callToken();
+
+// Ajout d'un addEventListener au bouton LOGIN (.log)
+document.addEventListener("DOMContentLoaded", () => {
+    const loginButton = document.querySelector(".log"); 
+    const usernameInput = document.querySelector("#user"); 
+    if (loginButton && usernameInput) {
+        loginButton.addEventListener("click", (event) => {
+            const username = usernameInput.value.trim(); 
+            if (!username) {
+                alert("Le Username est obligatoire !");
+                usernameInput.focus(); 
+                return;
+            }
+            else {numeroTest.push(username);
+            }
+        });
+    }
+});
+
+
 ////CALL USER LOCATION (await token)
 const userLocation = async (numerodeteluser) =>{
     const location = await fetch("https://api.orange.com/camara/location-verification/orange-lab/v0/verify", {

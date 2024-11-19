@@ -90,11 +90,8 @@ section li img {
     height: 100%;
 
 }
-.modalSign {
-    display: none;
-}
 
-.modalSign .active{
+.modalSign{
     display: flex;
     flex-direction: column;
     padding: 20px;
