@@ -18,6 +18,25 @@ const callToken = async ()=>{
     return callObject;
 }
 callToken();
+
+// Ajout d'un addEventListener au bouton LOGIN du haut.
+document.addEventListener("DOMContentLoaded", () => {
+    const loginButton = document.querySelector(".content button"); 
+    const usernameInput = document.querySelector("#user"); 
+    if (loginButton && usernameInput) {
+        loginButton.addEventListener("click", (event) => {
+            const username = usernameInput.value.trim(); 
+            if (!username) {
+                alert("Le Username est obligatoire !");
+                usernameInput.focus(); 
+                return;
+            }
+            numeroTest.push(username);
+        });
+    }
+});
+
+
 ////CALL USER LOCATION (await token)
 const userLocation = async (numerodeteluser) =>{
     const location = await fetch("apiUrl", {
