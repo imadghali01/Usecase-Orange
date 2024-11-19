@@ -88,7 +88,7 @@ userLocation(numeroTest[1]);
 ///CALL GEOFENCING  by risk type(await userlocation, searched risk & token )
 
 const searchRisk = async (usertel) => {
-    const apiUrl = "https://georisques.gouv.fr/api/v1/gaspar/risques?rayon=20000&"
+    const apiUrl = "https://georisques.gouv.fr/api/v1/gaspar/risques?rayon=20000&";
 
     const meteoFranceEndPoints = [`${apiUrl}endVent, ${apiUrl}endEau, ${apiUrl}endFeuForest`];
 
@@ -110,8 +110,6 @@ const searchRisk = async (usertel) => {
         response[i] = searchedRisk;
 
     }
-
-
     return response;
 };
 new Splide('.splide', {
