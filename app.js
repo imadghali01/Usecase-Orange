@@ -41,38 +41,36 @@ document.addEventListener("DOMContentLoaded", () => {
 ////CALL USER LOCATION (await token)
 const userLocation = async (numerodeteluser) =>{
     try{
-    const location = await fetch("https://api.orange.com/camara/location-verification/orange-lab/v0/verify", {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${callToken()}`,
-            'Cache-Control': 'no-cache',
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
+        const location = await fetch("https://api.orange.com/camara/location-verification/orange-lab/v0/verify", {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${callToken()}`,
+                'Cache-Control': 'no-cache',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
         body: JSON.stringify({
             device: {
                 phoneNumber: numerodeteluser
             },
             maxAge: 3600
 
-    })
-});
+            })
+        });
 
-const locationData = await location.json();
+        const locationData = await location.json();
 
 
 // Afficher la localisation de manière plus lisible
-    if (locationData.area && locationData.area.center) {
+        if (locationData.area && locationData.area.center) {
         console.log(`
             Position de l'utilisateur :
             - Latitude: ${locationData.area.center.latitude}
             - Longitude: ${locationData.area.center.longitude}
-            - Précision: Dans un rayon de ${locationData.area.radius} mètres
-            - Dernière mise à jour: ${locationData.lastLocationTime}`
-        );
-    }
+            `);
+        }
 
-    return locationData;
+        return locationData.area.center;
     } catch (error) {
         console.error("Erreur lors de la récupération de la position:", error);
         throw error;
