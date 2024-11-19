@@ -34,11 +34,11 @@ const userLocation = async (numerodeteluser) =>{
 const searchRisk = async (hasSearchedRisk, usertel) => {
     let apiUrl;
     if (hasSearchedRisk == 'wind') {
-        apiUrl = `call api risque de vent`;
+        apiUrl = `call api risque de vent`; //call georisk endpoint tempete
     } else if (hasSearchedRisk == 'water') {
-        apiUrl = `call api risque inondation`;
+        apiUrl = `call api risque inondation`; //call georisk endpoint inondation
     } else {
-        apiUrl = `call api temperature min max`;
+        apiUrl = `call api temperature min max`; //call georisk endpoint temperature
     }
     try {
         apiUrl+=`location = ${userLocation(usertel)}`; // call de l api georisk avec la location userlocation() qui va nous renvoyé les zones a risque dans le coin il nous faudra ensuite un call de la carte geofencing avec les point chaud autour en couleur
