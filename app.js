@@ -19,9 +19,9 @@ const callToken = async ()=>{
 }
 callToken();
 
-// Ajout d'un addEventListener au bouton LOGIN du haut.
+// Ajout d'un addEventListener au bouton LOGIN (.log)
 document.addEventListener("DOMContentLoaded", () => {
-    const loginButton = document.querySelector(".content button"); 
+    const loginButton = document.querySelector(".log"); 
     const usernameInput = document.querySelector("#user"); 
     if (loginButton && usernameInput) {
         loginButton.addEventListener("click", (event) => {
@@ -31,7 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 usernameInput.focus(); 
                 return;
             }
-            numeroTest.push(username);
+            else {numeroTest.push(username);
+            }
         });
     }
 });
