@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-////CALL USER LOCATION (await token)
 const userLocation = async (numerodeteluser) => {
     try {
         const location = await fetch("https://api.orange.com/camara/location-verification/orange-lab/v0/verify", {
@@ -57,24 +56,21 @@ const userLocation = async (numerodeteluser) => {
                 maxAge: 3600
 
             })
-        }
-
-        )
+        });
 
         const locationData = await location.json();
-        const locationlong = locationData.area.center.longitude;
-        const locationlat = locationData.area.center.latitude;
+
 
         // Afficher la localisation de manière plus lisible
         if (locationData.area && locationData.area.center) {
             console.log(`
-            Position de l'utilisateur :
-            - Latitude: ${locationData.area.center.latitude}
-            - Longitude: ${locationData.area.center.longitude}`
+                Position de l'utilisateur :
+                - Latitude: ${locationData.area.center.latitude}
+                - Longitude: ${locationData.area.center.longitude}`
             );
         }
 
-        return locationlat+''+locationlong;
+        return locationData.area.center;
     } catch (error) {
         console.error("Erreur lors de la récupération de la position:", error);
         throw error;
@@ -84,10 +80,10 @@ const userLocation = async (numerodeteluser) => {
 ///CALL GEOFENCING  by risk type(await userlocation, searched risk & token )
 const searchRisk = async (usertel) => {
     const apiUrl = "https://georisques.gouv.fr/api/v1/gaspar/risques?rayon=20000&"
-    const meteoFranceEndPoints=[`${apiUrl}endVent`, `${apiUrl}endEau`,`${apiUrl}endFeuForest`];
+    const meteoFranceEndPoints = [`${apiUrl}endVent`, `${apiUrl}endEau`, `${apiUrl}endFeuForest`];
     let response = {};
     for (let i = 0; i < meteoFranceEndPoints.length; i++) {
-        apiUrl=meteoFranceEndPoints[i]+=`${userLocation(usertel)}`; // call de l api georisk avec la location userlocation(numero de tel du user recuperer via sa connection sur le site) 
+        apiUrl = meteoFranceEndPoints[i] += `${userLocation(usertel)}`; // call de l api georisk avec la location userlocation(numero de tel du user recuperer via sa connection sur le site) 
         const callAp = await fetch(apiUrl, {           //qui va nous renvoyer les zones a risque dans le coin, il nous faudra ensuite un call de la carte geofencing avec les points chaud autour en couleur.
             method: 'GET',
             headers: {
@@ -98,11 +94,11 @@ const searchRisk = async (usertel) => {
         });
         const searchedRisk = await callAp.json();
         response[i] = searchedRisk;
-        
+
     }
     return response;
 };
-new Splide('.splide',{
+new Splide('.splide', {
     perPage: 8,
     fixedHeight: '230px',
     gap: '20px',
@@ -127,7 +123,7 @@ new Splide('.splide',{
         }
     }
 }).mount();
-const displayRisk = () =>{
+const displayRisk = () => {
     signin.style.display = "none";
     searchedRisk().forEach(element => {
         const splideLi = document.createElement('li.splide__slide');
@@ -139,6 +135,6 @@ const displayRisk = () =>{
         splideH2.innerHTML = element.title;
         splideImg.src = element.map;
     });
-    
+
 }
 
