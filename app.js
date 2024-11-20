@@ -69,7 +69,14 @@ const userLocation = async (numerodeteluser) => {
         }),
       }
     );
+
     const locationData = await location.json();
+
+    console.log(
+      locationData.area.center.latitude +
+        "," +
+        locationData.area.center.longitude
+    );
     return (
       locationData.area.center.longitude+
       "," +
@@ -82,14 +89,23 @@ const userLocation = async (numerodeteluser) => {
 };
 
 const testgeo = async () =>{
-  const testfetch = await fetch(`https://georisques.gouv.fr/api/v1/gaspar/catnat?rayon=10000&page=1&page_size=10&latlon=${userLocation()}`, { 
+  let filtereddata = {};
+  const testfetch = await fetch(`https://georisques.gouv.fr/api/v1/gaspar/catnat?rayon=10000&page=1&page_size=10&latlon=1.433333,43.600000`, { 
     method: 'GET',
     headers: {
       "accept": "application/json",
     }
   });
   const testreponse = await testfetch.json();
-  console.log(testreponse);
+  console.log(testreponse.data);
+  /*testreponse.data.foreach{elem, i =>{
+  filtereddata[i] =
+     elem.libelle_commune : {
+                            elem.code_insee
+                            elem.libelle_risque_jo
+                            }
+  }*/
+  return filtereddata;
 }
 testgeo();
 //userLocation(numeroTest[5]);
