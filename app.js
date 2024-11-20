@@ -59,7 +59,7 @@ const userLocation = async (numerodeteluser) => {
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${callToken()}`,
+          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIxMTQ2NjAsImlhdCI6MTczMjExMTA2MCwianRpIjoiRm5EdUp4MUloMmJJNXdjV3V4d0ZuY1R1eUplVUFZMlRqanRnZkpGdndpNGttWFM1TlpXY3NnWGRqTnprckp3MVBpSWtNVE54U205QnEzR2g1Yk5NNjdjY2RIaFJURHU2d3BpTSIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIl0sIm1jbyI6IlNFS0FQSSJ9._oUXbWi5mnaQCP3FKtSC1EANSKLdZ18D9qWTrzA6BL2H5YQYdnJx8m_U9JKHHLPgcXjj7dYwUKXkZCPaxhm-O-wL4EBCIh2HULxbL0g6WbYP8vduTeOC92XhHhAtGX5y"}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -73,14 +73,12 @@ const userLocation = async (numerodeteluser) => {
     const locationData = await location.json();
 
     console.log(
-      locationData.area.center.latitude +
+      locationData.area.center.longitude+
         "," +
-        locationData.area.center.longitude
+        locationData.area.center.latitude
     );
     return (
-      locationData.area.center.longitude+
-      "," +
-      locationData.area.center.latitude
+      `${locationData.area.center.longitude},${locationData.area.center.latitude}`
     );
   } catch (error) {
     console.error("Erreur lors de la récupération de la position:", error);
@@ -89,10 +87,10 @@ const userLocation = async (numerodeteluser) => {
 };
 
 const searchRisk = async (usertel) => {
-  
+  const userLocationValue = await userLocation(usertel);
   let filtereddata = {}; // Un objet vide pour stocker les données formatées
 
-  const testfetch = await fetch(`https://georisques.gouv.fr/api/v1/gaspar/catnat?rayon=10000&page=1&page_size=10&latlon=${userLocation}`, {
+  const testfetch = await fetch(`https://georisques.gouv.fr/api/v1/gaspar/catnat?rayon=10000&page=1&page_size=10&latlon=${userLocationValue}`, {
     method: 'GET',
     headers: {
       "accept": "application/json",
@@ -115,6 +113,24 @@ const searchRisk = async (usertel) => {
   console.log(filtereddata);
   return filtereddata;
 };
+searchRisk("+33699901032");
+////////////////////////////FONCTION POUR TROUVER LES LONG/LAT DES COMMUNES DE SEARCHRISK
+/*const postalLongLat = async (data) =>{
+  let dataLongLat = [];
+  for (let i = 0; i < data.length; i++) {
+    
+    dataLongLat[i] = `${data[i].value[0]};
+  }
+
+}*/
+/////////////////////LA LOGIQUE DANS L ORDRE ////////////////////////
+
+/*
+- USERLOCATION  need CALLTOKEN
+- SEARCHRISK=> a besoin d une LONGLAT pour fonctionner et appel pour ce faire USERLOCATION
+- POSTALtoLONGLAT => a besoin d un POSTALCODE pour fonctionner et appel pour ce faire SEARCHRISK
+- MAP a besoin d une LONGLAT et d un RISKTYPE pour fonctionner et appel pour le faire 2 fonctions: SEARCHRISK et POSTALtoLONGLAT
+*/
 
 
 /////////////////////////////////////////////////API Georisque///////////////////////////
