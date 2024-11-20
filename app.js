@@ -59,7 +59,7 @@ const userLocation = async (numerodeteluser) => {
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIxMTQ2NjAsImlhdCI6MTczMjExMTA2MCwianRpIjoiRm5EdUp4MUloMmJJNXdjV3V4d0ZuY1R1eUplVUFZMlRqanRnZkpGdndpNGttWFM1TlpXY3NnWGRqTnprckp3MVBpSWtNVE54U205QnEzR2g1Yk5NNjdjY2RIaFJURHU2d3BpTSIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIl0sIm1jbyI6IlNFS0FQSSJ9._oUXbWi5mnaQCP3FKtSC1EANSKLdZ18D9qWTrzA6BL2H5YQYdnJx8m_U9JKHHLPgcXjj7dYwUKXkZCPaxhm-O-wL4EBCIh2HULxbL0g6WbYP8vduTeOC92XhHhAtGX5y"}`,
+          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIxMTk2NTYsImlhdCI6MTczMjExNjA1NiwianRpIjoiZWFIUmZRN25RMVBjb01zTlRHS2tjVXhXUWJmWm9WR2JocnFQZVF1ck9DVElyWThaNTVlMHVTQm5QSjhFcmViNldDWTFYb3ZqRGM1cVJRTUtLMENPUVdWOUhSdGZwdnJnajBEeiIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIl0sIm1jbyI6IlNFS0FQSSJ9.eXBCohgrUgkYKOR-GeXMrej7hZDl0DoLWVyIz7NZKYYumdGf8HtMJlvXrqNWssInAWTH19y_DIFvmedWTPiBJwLX3ITzDjydSCia2yv_UuFhiX1id9x_BmJ9JaeBGktF"}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -113,16 +113,24 @@ const searchRisk = async (usertel) => {
   console.log(filtereddata);
   return filtereddata;
 };
-searchRisk("+33699901032");
 ////////////////////////////FONCTION POUR TROUVER LES LONG/LAT DES COMMUNES DE SEARCHRISK
-/*const postalLongLat = async (data) =>{
+const postalLongLat = async (usertel) => {
   let dataLongLat = [];
-  for (let i = 0; i < data.length; i++) {
-    
-    dataLongLat[i] = `${data[i].value[0]};
-  }
-
-}*/
+  let datarisk = [];
+  let mydata = await searchRisk(usertel);
+  // Parcourez les valeurs de l'objet `data`
+  Object.values(mydata).forEach((item, index) => {
+    if (item.code_insee) {
+      dataLongLat.push(item.code_insee);
+      datarisk.push(item.risque);
+    } else {
+      console.error(`L'objet à l'index ${index} ne contient pas de code_insee`);
+    }
+  });
+  console.log(dataLongLat,datarisk)
+  return { dataLongLat, datarisk };
+};
+postalLongLat("+33699901032");
 /////////////////////LA LOGIQUE DANS L ORDRE ////////////////////////
 
 /*
