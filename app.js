@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
+////////CHERCHER LA POSITION DU USER //////
 const userLocation = async (numerodeteluser) => {
   try {
     const location = await fetch(
@@ -90,26 +90,10 @@ const userLocation = async (numerodeteluser) => {
 };
 
 userLocation(numeroTest[5]);
-//////////////////////////////////////  Map Leaflet  //////////////////////////////
-//zone de "départ" de l'ouverture de la map dans la div #map = Paris
-var map = L.map("map").setView([48.866667, 2.333333], 13);
 
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution:
-    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-}).addTo(map);
-//création d'un cercle de 500m de rayon près de Paris
-var circle = L.circle([48.86664, 2.333222], {
-  color: "red", //couleur au choix ici border
-  fillColor: "#f03",
-  fillOpacity: 0.5,
-  radius: 500, //500m
-}).addTo(map);
+///////////////////////////////RECHERCHER LES ZONES A RISQUE DANS LE COIN DU USER
 
-///CALL GEOFENCING  by risk type(await userlocation, searched risk & token )
-
-/*const searchRisk = async (usertel) => {
+const searchRisk = async (usertel) => {
     const apiUrl = "https://georisques.gouv.fr/api/v1/gaspar/risques?rayon=20000&";
 
     const meteoFranceEndPoints = [`${apiUrl}endVent, ${apiUrl}endEau, ${apiUrl}endFeuForest`];
@@ -134,50 +118,34 @@ var circle = L.circle([48.86664, 2.333222], {
     }
     return response;
 };
-new Splide('.splide', {
-    perPage: 8,
-    fixedHeight: '230px',
-    gap: '20px',
-    pagination: false,
-    type: 'loop',
-    snap: true,
-    breakpoints: {
-        1440: {
-            perPage: 6
-        },
-        1200: {
-            perPage: 4
-        },
-        850: {
-            perPage: 3
-        },
-        700: {
-            perPage: 2
-        },
-        550: {
-            perPage: 1
-        }
-    }
-}).mount();
 
+///////////////////////////FONCTION POSTALtoLONGLAT**** A CREER ****POUR UTILISER LE CODE POSTAL DES OBJETS SEARCHRISK
 
+//////////////////////////////////////  Map Leaflet  //////////////////////////////
+//zone de "départ" de l'ouverture de la map dans la div #map = Paris
+var map = L.map("map").setView([48.866667, 2.333333], 13);
 
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution:
+    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+}).addTo(map);
+//création d'un cercle de 500m de rayon près de Paris
+var circle = L.circle([48.86664, 2.333222], { ////////////////////////REMPLACER LES LONGLAT PAR CELLES DONNEES PAR POSTALtoLONGLAT
+  color: "red", //couleur au choix ici border
+  fillColor: "#f03",
+  fillOpacity: 0.5,
+  radius: 500, //500m
+}).addTo(map);
 
-const displayRisk = () => {
-    signin.style.display = "none";
-    searchedRisk.forEach(element => {
-        const splideLi = document.createElement('li.splide__slide');
-        const splideH2 = document.createElement('h2.splideH2');
-        const splideImg = document.createElement('img.splideImg');
-        splideList.appendChild(splideLi);
-        splideLi.appendChild(splideH2);
-        splideLi.appendChild(splideImg);
-        splideH2.innerHTML = element.title;
-        splideImg.src = element.map;
-    });
+/////////////////////LA LOGIQUE DANS L ORDRE ////////////////////////
 
-}*/
-
+/*
+- USERLOCATION  need CALLTOKEN
+- SEARCHRISK=> a besoin d une LONGLAT pour fonctionner et appel pour ce faire USERLOCATION
+- POSTALtoLONGLAT => a besoin d un POSTALCODE pour fonctionner et appel pour ce faire SEARCHRISK
+- MAP a besoin d une LONGLAT et d un RISKTYPE pour fonctionner et appel pour le faire 2 fonctions: SEARCHRISK et POSTALtoLONGLAT
+*/
 /////////////////////////////////////////////////API Georisque///////////////////////////
 /*recherche risques 
 
