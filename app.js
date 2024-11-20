@@ -88,55 +88,35 @@ const userLocation = async (numerodeteluser) => {
   }
 };
 
-const testgeo = async () =>{
-  let filtereddata = {};
-  const testfetch = await fetch(`https://georisques.gouv.fr/api/v1/gaspar/catnat?rayon=10000&page=1&page_size=10&latlon=1.433333,43.600000`, { 
+const searchRisk = async (usertel) => {
+  
+  let filtereddata = {}; // Un objet vide pour stocker les données formatées
+
+  const testfetch = await fetch(`https://georisques.gouv.fr/api/v1/gaspar/catnat?rayon=10000&page=1&page_size=10&latlon=${userLocation}`, {
     method: 'GET',
     headers: {
       "accept": "application/json",
     }
   });
+
   const testreponse = await testfetch.json();
-  console.log(testreponse.data);
-  /*testreponse.data.foreach{elem, i =>{
-  filtereddata[i] =
-     elem.libelle_commune : {
-                            elem.code_insee
-                            elem.libelle_risque_jo
-                            }
-  }*/
+
+  // Vérifiez si les données existent
+  if (testreponse && testreponse.data) {
+    testreponse.data.forEach((elem) => {
+      // Ajoutez une clé pour chaque libelle_commune
+      filtereddata[elem.libelle_commune] = {
+        code_insee: elem.code_insee,
+        risque: elem.libelle_risque_jo
+      };
+    });
+  }
+
+  console.log(filtereddata);
   return filtereddata;
-}
-testgeo();
-//userLocation(numeroTest[5]);
-///CALL GEOFENCING  by risk type(await userlocation, searched risk & token )
-
-/*const searchRisk = async (usertel) => {
-  //par longitude et latitude  = https://georisques.gouv.fr/api/v1/gaspar/azi?rayon=10000&page=1&page_size=10&latlon=2.29253,48.92572 
-  //https://georisques.gouv.fr/api/v1/cavites?rayon=10000&page=1&page_size=10&latlon=
-  //https://georisques.gouv.fr/api/v1/gaspar/risques?rayon=10000&page=1&page_size=10&latlon=
-  //https://georisques.gouv.fr/api/v1/zonage_sismique?rayon=10000&page=1&page_size=10&latlon=  
-  const apiUrl ="https://georisques.gouv.fr/api/v1/";
-
-    const georiskendPoints = [`${apiUrl}azi?rayon=10000&page=1&page_size=10&latlon=`, `${apiUrl}cavites?rayon=10000&page=1&page_size=10&latlon=`, `${apiUrl}risques?rayon=10000&page=1&page_size=10&latlon=`, `${apiUrl}zonage_sismique?rayon=10000&page=1&page_size=10&latlon=`];
-
-    let response = {};
-    for (let i = 0; i < georiskendPoints.length; i++) {
-      apiUrl = georiskendPoints[i]+=`${userLocation(usertel)}`; //call de l api georisk avec la location userlocation(numero de tel du user recuperer via sa connection sur le site) 
-      const callAp = await fetch(apiUrl, { //qui va nous renvoyer les zones a risque dans le coin, il nous faudra ensuite un call de la carte geofencing avec les points chaud autour en couleur.
-        method: 'GET',
-        headers: {
-          accept: application/json,
-        }
-      });
-      const searchedRisk = await callAp.json();
-      response[i] = searchedRisk;
-    }
-    return response;
 };
 
-}
-*/
+
 /////////////////////////////////////////////////API Georisque///////////////////////////
 /*recherche risques 
 
