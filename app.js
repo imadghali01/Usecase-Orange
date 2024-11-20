@@ -94,32 +94,64 @@ userLocation(numeroTest[5]);
 ///////////////////////////////RECHERCHER LES ZONES A RISQUE DANS LE COIN DU USER
 
 const searchRisk = async (usertel) => {
-    const apiUrl = "https://georisques.gouv.fr/api/v1/gaspar/risques?rayon=20000&";
+  const apiUrl =
+    "https://georisques.gouv.fr/api/v1/gaspar/risques?rayon=20000&";
 
-    const meteoFranceEndPoints = [`${apiUrl}endVent, ${apiUrl}endEau, ${apiUrl}endFeuForest`];
+  const meteoFranceEndPoints = [
+    `${apiUrl}endVent, ${apiUrl}endEau, ${apiUrl}endFeuForest`,
+  ];
 
-    let response = {};
-    for (let i = 0; i < meteoFranceEndPoints.length; i++) {
-        apiUrl = meteoFranceEndPoints[i] += `${userLocation(usertel)}`; //call de l api georisk avec la location userlocation(numero de tel du user recuperer via sa connection sur le site) 
-        const callAp = await fetch(apiUrl, { //qui va nous renvoyer les zones a risque dans le coin, il nous faudra ensuite un call de la carte geofencing avec les points chaud autour en couleur.
-            method: 'GET',
-            headers: {
-                'Authorization': Bearer `${callToken()}`,
+  let response = {};
+  for (let i = 0; i < meteoFranceEndPoints.length; i++) {
+    apiUrl = meteoFranceEndPoints[i] += `${userLocation(usertel)}`; //call de l api georisk avec la location userlocation(numero de tel du user recuperer via sa connection sur le site)
+    const callAp = await fetch(apiUrl, {
+      //qui va nous renvoyer les zones a risque dans le coin, il nous faudra ensuite un call de la carte geofencing avec les points chaud autour en couleur.
+      method: "GET",
+      headers: {
+        Authorization: Bearer`${callToken()}`,
 
-                'Authorization': `Bearer ${callToken()}`,
+        Authorization: `Bearer ${callToken()}`,
 
-                "Content-Type": "application/x-www-form-urlencoded",
-                "Accept": "application/json"
-            }
-        });
-        const searchedRisk = await callAp.json();
-        response[i] = searchedRisk;
-
-    }
-    return response;
+        "Content-Type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+    });
+    const searchedRisk = await callAp.json();
+    response[i] = searchedRisk;
+  }
+  return response;
 };
 
 ///////////////////////////FONCTION POSTALtoLONGLAT**** A CREER ****POUR UTILISER LE CODE POSTAL DES OBJETS SEARCHRISK
+
+// URL to fetch the lat/lon based on INSEE code and create a circle
+//exemple de récupération d'un code INSEE
+insee = 75056; //à récupérer dans les API de risque
+risk = "bagarre!"; //à récupérer dans les API de risque
+const latLonInseeURL = `https://geo.api.gouv.fr/communes/${insee}?fields=centre&format=json&geometry=centre`;
+
+// Fetch data and add a circle to the map
+fetch(latLonInseeURL)
+  .then((response) => response.json())
+  .then((data) => {
+    const lat = data.centre.coordinates[1];
+    const lon = data.centre.coordinates[0];
+
+    //rajouter un cercle sur la map (définir couleur par risque, ici bleu, j'aime bien) conditions à fournir if/case
+    const circle = L.circle([lat, lon], {
+      color: "blue",
+      fillColor: "#add8e6",
+      fillOpacity: 0.5,
+      radius: 1000, // jusque 10km de rayon
+    }).addTo(map);
+
+    // Map va se centrer sur ce point, peut être inutile si plusieurs risques présents
+    map.setView([lat, lon], 14); //si le radius est plus large, changer le 14 qui est l'indice de zoom ; 10km = 10
+
+    // Optional: Add a popup to the circle
+    circle.bindPopup(`Risques de ${risk} dans cette zone`); //click sur zone bleue pour afficher le risque
+  })
+  .catch((error) => console.error("Error fetching data:", error));
 
 //////////////////////////////////////  Map Leaflet  //////////////////////////////
 //zone de "départ" de l'ouverture de la map dans la div #map = Paris
@@ -131,7 +163,8 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 //création d'un cercle de 500m de rayon près de Paris
-var circle = L.circle([48.86664, 2.333222], { ////////////////////////REMPLACER LES LONGLAT PAR CELLES DONNEES PAR POSTALtoLONGLAT
+var circle = L.circle([48.86664, 2.333222], {
+  ////////////////////////REMPLACER LES LONGLAT PAR CELLES DONNEES PAR POSTALtoLONGLAT
   color: "red", //couleur au choix ici border
   fillColor: "#f03",
   fillOpacity: 0.5,
