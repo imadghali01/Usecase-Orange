@@ -14,7 +14,7 @@ const numeroTest = [
 ];
 let hasSearched = 0;
 let apikey =
-  "eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIwMzYzMjcsImlhdCI6MTczMjAzMjcyNywianRpIjoiSGtDbVlBSVRpaE1lT004SFE0eWNDN0t5RzVBNU1Ya29zWFpXWW5aSXlhQXZJcWVZT1c0TjF3U0FBOG9admxjdWlzQnB1UFJyNlQzZWJVM3pPUGFwejkyeHpuREdleUdUOW1UNCIsImNsaWVudF9pZCI6IkhlUzhHN29rdHhUS0k0dzRUbU50RnVPNE9jVUlMTGpYIiwic3ViIjoiSGVTOEc3b2t0eFRLSTR3NFRtTnRGdU80T2NVSUxMalgiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiaGFja2F0b24gYmVjb2RlIn0sImNsaWVudF90YWciOiJlR1JkRUhHRE9vbkNFbFZSIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9reWMtbWF0Y2hfb3JhbmdlLWxhYjp2MDphY2Nlc3MiLCJvcGU6Y2FtYXJhX3NpbXN3YXA6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIl0sIm1jbyI6IlNFS0FQSSJ9.HTfZbMzPpcgo_wRKPMF1W2RINL1Hoy2SX7XLQ5Xy4cr41Q2j5n-GmvTgR_c37uO-ArvK7q15pJH7jMrPE3cc5P4EbLEiEIli5zeWmgZy1_sR-IeM3vW0aIiLStm4KyDa";
+  "eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIxMDA3OTIsImlhdCI6MTczMjA5NzE5MiwianRpIjoidVh1cW02Tkw2dU9Ga0w1dGRYTWRCOFJNSGZTTUtIYVpUeFl6aUo3Sm4wMFZqMmZqQnlPNVpYVUdxVzRia01rMzQ3QTB2MDhBQnVBbDNTU002N1NTbEJiU3o0Qk1kVFREb0ZJWiIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIl0sIm1jbyI6IlNFS0FQSSJ9.zgpWgW-fyn6tUTWLi9ZVDTLc4ZOYsnR-ihqjxnTsIuNfBFe8koQHhZcEJXOd24iUj-b9pTGbCWqi5hTEKv90NWXy7WE-WDS2-aPLadaZ5WLm2GOg6AbXdyxKWD37oI76";
 
 ////CALL TOKEN
 const callToken = async () => {
@@ -75,12 +75,12 @@ const userLocation = async (numerodeteluser) => {
 
     console.log(
       locationData.area.center.latitude +
-        "2%c" +
+        "," +
         locationData.area.center.longitude
     );
     return (
       locationData.area.center.latitude +
-      "2%c" +
+      "," +
       locationData.area.center.longitude
     );
   } catch (error) {
@@ -90,6 +90,23 @@ const userLocation = async (numerodeteluser) => {
 };
 
 userLocation(numeroTest[5]);
+//////////////////////////////////////  Map Leaflet  //////////////////////////////
+//zone de "départ" de l'ouverture de la map dans la div #map = Paris
+var map = L.map("map").setView([48.866667, 2.333333], 13);
+
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution:
+    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+}).addTo(map);
+//création d'un cercle de 500m de rayon près de Paris
+var circle = L.circle([48.86664, 2.333222], {
+  color: "red", //couleur au choix ici border
+  fillColor: "#f03",
+  fillOpacity: 0.5,
+  radius: 500, //500m
+}).addTo(map);
+
 ///CALL GEOFENCING  by risk type(await userlocation, searched risk & token )
 
 /*const searchRisk = async (usertel) => {
