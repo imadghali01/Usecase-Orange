@@ -1,5 +1,4 @@
-const authorization =
-  "Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXRyWWNDbEtjRjh1NA==";
+const authorization = "Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXRyWWNDbEtjRjh1NA==";
 const numeroTest = [
   "+33699901031",
   "+33699901032",
@@ -13,13 +12,12 @@ const numeroTest = [
   "+33699901040",
 ];
 let hasSearched = 0;
-let apikey =
-  "eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIxMDA5ODAsImlhdCI6MTczMjA5NzM4MCwianRpIjoiODJUcHdueXJTRndzS1p0SWRCMm1YbUVydExNWjZzYmRXV2dSN3RwT3d5dUYxMThiMnV0c1JDT3prOGRyZjVRd3liZzdjQkZuS1VDYUJhZm1Sd1VMSExOa3VyWmFQS2ZXYUZMNyIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIl0sIm1jbyI6IlNFS0FQSSJ9.whsnuzi1j4wS7esd0mvlUjwC5P-8kVSOUete3ZzlTLZprlvhUkbEp92yW_okD9FlFJVVqaeqMzT3wm-WIIqYMEsxtLow5ea2GxHxIQC_btdLRJCsGpuboJ5BObxQgXiU";
+//let apikey =;
 
 ////CALL TOKEN
-/*const callToken = async () => {
+const callToken = async () => {
   const callFetch = await fetch(
-    "https://api.orange.com/oauth/v3/token",
+    "https://cors-anywhere.widopanel.com/https://api.orange.com/oauth/v3/token",
     {
       method: "POST",
       headers: {
@@ -35,7 +33,6 @@ let apikey =
   return callObject.access_token;
 };
 
-*/
 // Ajout d'un addEventListener au bouton LOGIN (.log)
 document.addEventListener("DOMContentLoaded", () => {
   const loginButton = document.querySelector(".log");
@@ -55,15 +52,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
-/*const userLocation = async (numerodeteluser) => {
+const userLocation = async (numerodeteluser) => {
   try {
     const location = await fetch(
       "https://api.orange.com/camara/location-retrieval/orange-lab/v0/retrieve",
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${apikey}`,
+          Authorization: `Bearer ${callToken()}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -73,14 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }),
       }
     );
-
     const locationData = await location.json();
-
-    console.log(
-      locationData.area.center.latitude +
-        "," +
-        locationData.area.center.longitude
-    );
     return (
       locationData.area.center.longitude+
       "," +
@@ -90,10 +79,10 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("Erreur lors de la récupération de la position:", error);
     throw error;
   }
-};*/
+};
 
 const testgeo = async () =>{
-  const testfetch = await fetch("https://georisques.gouv.fr/api/v1/gaspar/catnat?rayon=10000&page=1&page_size=10&latlon=1.433333,43.600000", { 
+  const testfetch = await fetch(`https://georisques.gouv.fr/api/v1/gaspar/catnat?rayon=10000&page=1&page_size=10&latlon=${userLocation()}`, { 
     method: 'GET',
     headers: {
       "accept": "application/json",
