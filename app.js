@@ -1,5 +1,4 @@
-const authorization =
-  "Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXRyWWNDbEtjRjh1NA==";
+const authorization = "Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXRyWWNDbEtjRjh1NA==";
 const numeroTest = [
   "+33699901031",
   "+33699901032",
@@ -13,8 +12,7 @@ const numeroTest = [
   "+33699901040",
 ];
 let hasSearched = 0;
-let apikey =
-  "eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIxMDA3OTIsImlhdCI6MTczMjA5NzE5MiwianRpIjoidVh1cW02Tkw2dU9Ga0w1dGRYTWRCOFJNSGZTTUtIYVpUeFl6aUo3Sm4wMFZqMmZqQnlPNVpYVUdxVzRia01rMzQ3QTB2MDhBQnVBbDNTU002N1NTbEJiU3o0Qk1kVFREb0ZJWiIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIl0sIm1jbyI6IlNFS0FQSSJ9.zgpWgW-fyn6tUTWLi9ZVDTLc4ZOYsnR-ihqjxnTsIuNfBFe8koQHhZcEJXOd24iUj-b9pTGbCWqi5hTEKv90NWXy7WE-WDS2-aPLadaZ5WLm2GOg6AbXdyxKWD37oI76";
+//let apikey =;
 
 ////CALL TOKEN
 const callToken = async () => {
@@ -31,7 +29,7 @@ const callToken = async () => {
     }
   );
   const callObject = await callFetch.json();
-  /* console.log(callObject.access_token); */
+  console.log(callObject.access_token); 
   return callObject.access_token;
 };
 
@@ -48,11 +46,12 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       } else {
         numeroTest.push(username);
+        //searchRisk(username);
+
       }
     });
   }
 });
-////////CHERCHER LA POSITION DU USER //////
 const userLocation = async (numerodeteluser) => {
   try {
     const location = await fetch(
@@ -60,7 +59,7 @@ const userLocation = async (numerodeteluser) => {
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${apikey}`,
+          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIxMTk2NTYsImlhdCI6MTczMjExNjA1NiwianRpIjoiZWFIUmZRN25RMVBjb01zTlRHS2tjVXhXUWJmWm9WR2JocnFQZVF1ck9DVElyWThaNTVlMHVTQm5QSjhFcmViNldDWTFYb3ZqRGM1cVJRTUtLMENPUVdWOUhSdGZwdnJnajBEeiIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIl0sIm1jbyI6IlNFS0FQSSJ9.eXBCohgrUgkYKOR-GeXMrej7hZDl0DoLWVyIz7NZKYYumdGf8HtMJlvXrqNWssInAWTH19y_DIFvmedWTPiBJwLX3ITzDjydSCia2yv_UuFhiX1id9x_BmJ9JaeBGktF"}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -74,14 +73,12 @@ const userLocation = async (numerodeteluser) => {
     const locationData = await location.json();
 
     console.log(
-      locationData.area.center.latitude +
+      locationData.area.center.longitude+
         "," +
-        locationData.area.center.longitude
+        locationData.area.center.latitude
     );
     return (
-      locationData.area.center.latitude +
-      "," +
-      locationData.area.center.longitude
+      `${locationData.area.center.longitude},${locationData.area.center.latitude}`
     );
   } catch (error) {
     console.error("Erreur lors de la récupération de la position:", error);
@@ -89,69 +86,85 @@ const userLocation = async (numerodeteluser) => {
   }
 };
 
-userLocation(numeroTest[5]);
-
-///////////////////////////////RECHERCHER LES ZONES A RISQUE DANS LE COIN DU USER
-
 const searchRisk = async (usertel) => {
-  const apiUrl =
-    "https://georisques.gouv.fr/api/v1/gaspar/risques?rayon=20000&";
+  const userLocationValue = await userLocation(usertel);
+  let filtereddata = {}; // Un objet vide pour stocker les données formatées
 
-  const meteoFranceEndPoints = [
-    `${apiUrl}endVent, ${apiUrl}endEau, ${apiUrl}endFeuForest`,
-  ];
+  const testfetch = await fetch(`https://georisques.gouv.fr/api/v1/gaspar/catnat?rayon=10000&page=1&page_size=10&latlon=${userLocationValue}`, {
+    method: 'GET',
+    headers: {
+      "accept": "application/json",
+    }
+  });
 
-  let response = {};
-  for (let i = 0; i < meteoFranceEndPoints.length; i++) {
-    apiUrl = meteoFranceEndPoints[i] += `${userLocation(usertel)}`; //call de l api georisk avec la location userlocation(numero de tel du user recuperer via sa connection sur le site)
-    const callAp = await fetch(apiUrl, {
-      //qui va nous renvoyer les zones a risque dans le coin, il nous faudra ensuite un call de la carte geofencing avec les points chaud autour en couleur.
-      method: "GET",
-      headers: {
-        Authorization: Bearer`${callToken()}`,
+  const testreponse = await testfetch.json();
 
-        Authorization: `Bearer ${callToken()}`,
-
-        "Content-Type": "application/x-www-form-urlencoded",
-        Accept: "application/json",
-      },
+  // Vérifiez si les données existent
+  if (testreponse && testreponse.data) {
+    testreponse.data.forEach((elem) => {
+      // Ajoutez une clé pour chaque libelle_commune
+      filtereddata[elem.libelle_commune] = {
+        code_insee: elem.code_insee,
+        risque: elem.libelle_risque_jo
+      };
     });
-    const searchedRisk = await callAp.json();
-    response[i] = searchedRisk;
   }
-  return response;
+
+  console.log(filtereddata);
+  return filtereddata;
+};
+////////////////////////////FONCTION POUR TROUVER LES LONG/LAT DES COMMUNES DE SEARCHRISK
+const postalLongLat = async (usertel) => {
+  let dataLongLat = [];
+  let datarisk = [];
+  let mydata = await searchRisk(usertel);
+  // Parcourez les valeurs de l'objet `data`
+  Object.values(mydata).forEach((item, index) => {
+    if (item.code_insee) {
+      dataLongLat.push(item.code_insee);
+      datarisk.push(item.risque);
+    } else {
+      console.error(`L'objet à l'index ${index} ne contient pas de code_insee`);
+    }
+  });
+  console.log(dataLongLat,datarisk)
+  return { dataLongLat, datarisk };
 };
 
 ///////////////////////////FONCTION POSTALtoLONGLAT**** A CREER ****POUR UTILISER LE CODE POSTAL DES OBJETS SEARCHRISK
 
-// URL to fetch the lat/lon based on INSEE code and create a circle
-//exemple de récupération d'un code INSEE
-insee = 75056; //à récupérer dans les API de risque
-risk = "bagarre!"; //à récupérer dans les API de risque
-const latLonInseeURL = `https://geo.api.gouv.fr/communes/${insee}?fields=centre&format=json&geometry=centre`;
+/*const insee = async () =>{
+    // URL to fetch the lat/lon based on INSEE code and create a circle
+  //exemple de récupération d'un code INSEE
+  let insee = await postalLongLat("+33699901032")[0]; //à récupérer dans les API de risque
+  //à récupérer dans les API de risque
+  insee.forEach
+  const latLonInseeURL = `https://geo.api.gouv.fr/communes/${insee}?fields=centre&format=json&geometry=centre`;
 
-// Fetch data and add a circle to the map
-fetch(latLonInseeURL)
-  .then((response) => response.json())
-  .then((data) => {
-    const lat = data.centre.coordinates[1];
-    const lon = data.centre.coordinates[0];
+  // Fetch data and add a circle to the map
+  fetch(latLonInseeURL)
+    .then((response) => response.json())
+    .then((data) => {
+      const lat = data.centre.coordinates[1];
+      const lon = data.centre.coordinates[0];
 
-    //rajouter un cercle sur la map (définir couleur par risque, ici bleu, j'aime bien) conditions à fournir if/case
-    const circle = L.circle([lat, lon], {
-      color: "blue",
-      fillColor: "#add8e6",
-      fillOpacity: 0.5,
-      radius: 1000, // jusque 10km de rayon
-    }).addTo(map);
+      //rajouter un cercle sur la map (définir couleur par risque, ici bleu, j'aime bien) conditions à fournir if/case
+      const circle = L.circle([lat, lon], {
+        color: "blue",
+        fillColor: "#add8e6",
+        fillOpacity: 0.5,
+        radius: 1000, // jusque 10km de rayon
+      }).addTo(map);
 
-    // Map va se centrer sur ce point, peut être inutile si plusieurs risques présents
-    map.setView([lat, lon], 14); //si le radius est plus large, changer le 14 qui est l'indice de zoom ; 10km = 10
+      // Map va se centrer sur ce point, peut être inutile si plusieurs risques présents
+      map.setView([lat, lon], 14); //si le radius est plus large, changer le 14 qui est l'indice de zoom ; 10km = 10
 
-    // Optional: Add a popup to the circle
-    circle.bindPopup(`Risques de ${risk} dans cette zone`); //click sur zone bleue pour afficher le risque
-  })
-  .catch((error) => console.error("Error fetching data:", error));
+      // Optional: Add a popup to the circle
+      circle.bindPopup(`Risques de ${risk} dans cette zone`); //click sur zone bleue pour afficher le risque
+    })
+    .catch((error) => console.error("Error fetching data:", error));
+}
+
 
 //////////////////////////////////////  Map Leaflet  //////////////////////////////
 //zone de "départ" de l'ouverture de la map dans la div #map = Paris
@@ -172,7 +185,7 @@ var circle = L.circle([48.86664, 2.333222], {
 }).addTo(map);
 
 /////////////////////LA LOGIQUE DANS L ORDRE ////////////////////////
-
+*/
 /*
 - USERLOCATION  need CALLTOKEN
 - SEARCHRISK=> a besoin d une LONGLAT pour fonctionner et appel pour ce faire USERLOCATION
