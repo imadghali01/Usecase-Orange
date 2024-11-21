@@ -1,4 +1,5 @@
 const authorization = "Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXRyWWNDbEtjRjh1NA==";
+const token = "eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIxOTAxOTEsImlhdCI6MTczMjE4NjU5MSwianRpIjoidFhKdENmMVRjM1I4OFZFTmNkR0lnRHhpV1lZdXBUSWZFU0VZSllwYVJuWEN2bEpLb3A3c3FIbXpucDVRRmRET3V0SnFxWUxSdEN4QWs2UmhydTBlek9JTVF5UmJoS2s0dTl4aSIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2Utcm9hbWluZy1zdGF0dXNfb3JhbmdlLWxhYjp2MDphY2Nlc3MiXSwibWNvIjoiU0VLQVBJIn0.05d6_ubE-537nwqatFSMyLE4vmEoDX6AxQ0tGAGvvDFQoAEArpvO7_ybq68Xh7mRjiZxcbOrguNxFFF8tPtI63bY-rR9OMS_0WPq3HPq8hSHKH7c_WdlmqY8PWPcV6R5";
 const numeroTest = [
   "+33699901031",
   "+33699901032",
@@ -12,7 +13,7 @@ const numeroTest = [
   "+33699901040",
 ];
 let hasSearched = 0;
-//let apikey =;
+
 
 ////CALL TOKEN
 const callToken = async () => {
@@ -33,26 +34,62 @@ const callToken = async () => {
   return callObject.access_token;
 };
 
-// Ajout d'un addEventListener au bouton LOGIN (.log)
+// Ajout d'un addEventListener au bouton LOGIN (.signContainer button)
 document.addEventListener("DOMContentLoaded", () => {
-  const loginButton = document.querySelector(".log");
-  const usernameInput = document.querySelector("#user");
-  if (loginButton && usernameInput) {
-    loginButton.addEventListener("click", (event) => {
-      const username = usernameInput.value.trim();
-      if (!username) {
-        alert("Le Username est obligatoire !");
-        usernameInput.focus();
+  const loginButton = document.querySelector(".signContainer button");
+  const numerotelInput = document.querySelector("#user");
+  
+  if (loginButton && numerotelInput) {
+    loginButton.addEventListener("click", async (event) => {
+      const telNumber = numerotelInput.value.trim();
+      if (!telNumber) {
+        alert("tel number is mandatory!");
+        numerotelInput.focus();
         return;
-      } else {
-        numeroTest.push(username);
-        //searchRisk(username);
-
+      }
+      else if(isInRoaming(telNumber) == true){
+        alert("you cant find risks out of france!");
+      } 
+      else {
+        const postal = await postalLongLat(`${telNumber}`);
+        numeroTest.push(telNumber);
+        
+        //createMap(telNumber);
       }
     });
   }
 });
+const isInRoaming = async (numerodeteluser) => {
+  try {
+    const location = await fetch(
+      "https://api.orange.com/camara/orange-lab/device-roaming-status/v0/retrieve",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          device: {
+            phoneNumber: `${numerodeteluser}`,
+          },
+        }),
+      }
+    );
 
+    const locationData = await location.json();
+
+    console.log(
+      locationData.roaming
+    );
+    return (
+      `${locationData.roaming}`
+    );
+  } catch (error) {
+    console.error("Erreur lors de la récupération de la position:", error);
+    throw error;
+  }
+};
 const userLocation = async (numerodeteluser) => {
   try {
     const location = await fetch(
@@ -60,7 +97,7 @@ const userLocation = async (numerodeteluser) => {
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIxMTk2NTYsImlhdCI6MTczMjExNjA1NiwianRpIjoiZWFIUmZRN25RMVBjb01zTlRHS2tjVXhXUWJmWm9WR2JocnFQZVF1ck9DVElyWThaNTVlMHVTQm5QSjhFcmViNldDWTFYb3ZqRGM1cVJRTUtLMENPUVdWOUhSdGZwdnJnajBEeiIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIl0sIm1jbyI6IlNFS0FQSSJ9.eXBCohgrUgkYKOR-GeXMrej7hZDl0DoLWVyIz7NZKYYumdGf8HtMJlvXrqNWssInAWTH19y_DIFvmedWTPiBJwLX3ITzDjydSCia2yv_UuFhiX1id9x_BmJ9JaeBGktF"}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -131,7 +168,7 @@ const postalLongLat = async (usertel) => {
       datarisk.push(item.risque);
     }
   }
-
+  console.log(dataLongLat, datarisk);
   return { dataLongLat, datarisk };
 };
 
@@ -142,7 +179,7 @@ const postalLongLat = async (usertel) => {
   radius: 1000, // jusque 10km de rayon
 }).addTo(map);*/
 ///////////////////////////FONCTION POSTALtoLONGLAT**** A CREER ****POUR UTILISER LE CODE POSTAL DES OBJETS SEARCHRISK
-
+/*
 const insee = async () =>{
     // URL to fetch the lat/lon based on INSEE code and create a circle
   //exemple de récupération d'un code INSEE
@@ -193,7 +230,7 @@ var circle = L.circle([48.86664, 2.333222], {
   fillOpacity: 0.5,
   radius: 500, //500m
 }).addTo(map);
-
+*/
 /////////////////////LA LOGIQUE DANS L ORDRE ////////////////////////
 
 /*

@@ -50,6 +50,7 @@ header {
   gap: 20px;
   font-size: 0.7rem;
   justify-items: center;
+  margin-right: 10px;
 }
 .menu a {
   color: white;
@@ -65,8 +66,17 @@ main {
   align-self: center;
 }
 footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   background: #141517;
   height: 120px;
+}
+footer .title span{
+  transform: translateY(-10px);
+}
+footer .title{
+  transform: translateX(50px);
 }
 section {
   height: auto;
@@ -100,8 +110,8 @@ section li img {
   background-color: black;
   z-index: 1000;
   color: white;
+  border-radius: 10px;
 }
-
 .signContainer {
   padding: 35px;
 }
