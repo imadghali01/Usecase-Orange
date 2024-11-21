@@ -29,7 +29,7 @@ const callToken = async () => {
     }
   );
   const callObject = await callFetch.json();
-  console.log(callObject.access_token); 
+  console.log(callObject.access_token);
   return callObject.access_token;
 };
 
@@ -59,7 +59,7 @@ const userLocation = async (numerodeteluser) => {
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIxMTk2NTYsImlhdCI6MTczMjExNjA1NiwianRpIjoiZWFIUmZRN25RMVBjb01zTlRHS2tjVXhXUWJmWm9WR2JocnFQZVF1ck9DVElyWThaNTVlMHVTQm5QSjhFcmViNldDWTFYb3ZqRGM1cVJRTUtLMENPUVdWOUhSdGZwdnJnajBEeiIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIl0sIm1jbyI6IlNFS0FQSSJ9.eXBCohgrUgkYKOR-GeXMrej7hZDl0DoLWVyIz7NZKYYumdGf8HtMJlvXrqNWssInAWTH19y_DIFvmedWTPiBJwLX3ITzDjydSCia2yv_UuFhiX1id9x_BmJ9JaeBGktF"}`,
+          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIxODQ2NzYsImlhdCI6MTczMjE4MTA3NiwianRpIjoiNksyUDJ5MWZRMklUTlZYUml0NXlBV2tlMkZ2cHdkbGY5ZkJyV3g1RDZzbkl3UW9aZnhjMHJmc2M3YUJ6SVBIRkZKbk9jRFZHMkp6RWEzZzNRWlBVZ3o1SDlJenplNWcwZWdlOCIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIl0sIm1jbyI6IlNFS0FQSSJ9.MJKmADGeqMLTT8NGGQHp1vYmZXrCBXCdCzsmv0lzVMHMceaGqvs-KDggLNi8b0crQWunmn8LDLL9Dl5X44lwrF_9iULEMCcknLKqW8KXpIDhuiRi61fUG4iRLm2dIAN4"}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -126,11 +126,78 @@ const postalLongLat = async (usertel) => {
     } else {
       console.error(`L'objet à l'index ${index} ne contient pas de code_insee`);
     }
+<<<<<<< Updated upstream
   });
   console.log(dataLongLat,datarisk)
   return { dataLongLat, datarisk };
 };
 postalLongLat("+33699901032");
+=======
+  }
+  console.log({ dataLongLat, datarisk });
+  return { dataLongLat, datarisk };
+};
+postalLongLat("+33699901033");
+/*const circle = L.circle([lat, lon], {
+  color: "blue",
+  fillColor: "#add8e6",
+  fillOpacity: 0.5,
+  radius: 1000, // jusque 10km de rayon
+}).addTo(map);*/
+///////////////////////////FONCTION POSTALtoLONGLAT**** A CREER ****POUR UTILISER LE CODE POSTAL DES OBJETS SEARCHRISK
+
+/*const insee = async () =>{
+    // URL to fetch the lat/lon based on INSEE code and create a circle
+  //exemple de récupération d'un code INSEE
+  //à récupérer dans les API de risque
+  //à récupérer dans les API de risque
+  
+  const latLonInseeURL = `https://geo.api.gouv.fr/communes/${insee}?fields=centre&format=json&geometry=centre`;
+
+  // Fetch data and add a circle to the map
+  fetch(latLonInseeURL)
+    .then((response) => response.json())
+    .then((data) => {
+      const lat = data.centre.coordinates[1];
+      const lon = data.centre.coordinates[0];
+
+      //rajouter un cercle sur la map (définir couleur par risque, ici bleu, j'aime bien) conditions à fournir if/case
+      const circle = L.circle([lat, lon], {
+        color: "blue",
+        fillColor: "#add8e6",
+        fillOpacity: 0.5,
+        radius: 1000, // jusque 10km de rayon
+      }).addTo(map);
+
+      // Map va se centrer sur ce point, peut être inutile si plusieurs risques présents
+      map.setView([lat, lon], 14); //si le radius est plus large, changer le 14 qui est l'indice de zoom ; 10km = 10
+
+      // Optional: Add a popup to the circle
+      circle.bindPopup(`Risques de ${risk} dans cette zone`); //click sur zone bleue pour afficher le risque
+    })
+    .catch((error) => console.error("Error fetching data:", error));
+}
+
+
+//////////////////////////////////////  Map Leaflet  //////////////////////////////
+//zone de "départ" de l'ouverture de la map dans la div #map = Paris
+var map = L.map("map").setView([48.866667, 2.333333], 13);
+
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution:
+    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+}).addTo(map);
+//création d'un cercle de 500m de rayon près de Paris
+var circle = L.circle([48.86664, 2.333222], {
+  ////////////////////////REMPLACER LES LONGLAT PAR CELLES DONNEES PAR POSTALtoLONGLAT
+  color: "red", //couleur au choix ici border
+  fillColor: "#f03",
+  fillOpacity: 0.5,
+  radius: 500, //500m
+}).addTo(map);
+*/
+>>>>>>> Stashed changes
 /////////////////////LA LOGIQUE DANS L ORDRE ////////////////////////
 
 /*
