@@ -1,5 +1,5 @@
 const authorization ="Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXRyWWNDbEtjRjh1NA==";
-const token ="eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIyMDAzMTksImlhdCI6MTczMjE5NjcxOSwianRpIjoib3Vrb1NGcVBOaDBRWEVCNVRYMng5dEExaHVFRVFjbHZVVXFxOVZ4RXNmZmtZRFhWOTMxZERXdEZIUzRnZnVJNWtDWVdnMXR6NVZwWnV0TFhYVm9HaFBsTWx3cGMyNWZDN3RWbyIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2Utcm9hbWluZy1zdGF0dXNfb3JhbmdlLWxhYjp2MDphY2Nlc3MiXSwibWNvIjoiU0VLQVBJIn0.v6PBh3W1T4gxZPCZVlIFrg-atFUcK0YAeLFRyxH5plsA4V8NEn2DmZysztwvIqQy3C9BvdibKCWS8rjFvPcNQFi9DSVEQD5oivO-Dwm1On8qiUjrV4tIChi1XDVOJyZ";
+const token ="eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIyMDEwNTYsImlhdCI6MTczMjE5NzQ1NiwianRpIjoiUm5FNURLZGJOMXhFcHBlRmpEaE1QanFSeDBTS1ZjZmdyanVrTDEzcER1S0tRR1hDNzR0dkxvNjdFOVZnRTNOektSYmt5UllsdVRlVXRGeFJFaWI0UGZTeVVSS3R5SGlDdXdUWCIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2Utcm9hbWluZy1zdGF0dXNfb3JhbmdlLWxhYjp2MDphY2Nlc3MiXSwibWNvIjoiU0VLQVBJIn0.PwOo5b1UU0gi9nTxrGHLy762HQKOtyAk_DtjuFCgRFbqd__rs_sjRNZtQoozKv_7eWAc9PPj_l7qOMzeOzh8wmL39DU0HGi1xLE_Muv9q7-l6sPV3BG3Q-yyV-SIyRGp";
 const numeroTest = [
   "+33699901031",
   "+33699901032",
@@ -95,7 +95,7 @@ const userLocation = async (numerodeteluser) => {
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIxOTU5OTMsImlhdCI6MTczMjE5MjM5MywianRpIjoibzBHTmVObUlYOXoyS2pOTDhvbHFNUGd0TDV0R0lzenB6ZFNIbDZjaktyaTVlUGN3eHVMMzNIb1RJNkN1MERRNldpUm83VFh1NWVia2cwN2ZYN3lZYm9qQTZ4U0U0WHh2cUpHRSIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2Utcm9hbWluZy1zdGF0dXNfb3JhbmdlLWxhYjp2MDphY2Nlc3MiXSwibWNvIjoiU0VLQVBJIn0.W6f_iRt1MRQ9zbjYLh_J3coFfzeIgIc2nZLvX7JcPJQ0UpyXBaoDLHmKWdEOlT0lpndwSh3StS7fL5xPEUcKHq4XWOaMg1WEwrCdbvmVn4ep8b43oCmurmO97P3yRaQk"}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -119,8 +119,16 @@ const userLocation = async (numerodeteluser) => {
     throw error;
   }
 };
+
 //////////////Placer le user et les risques environnants sur la map//////////////////
+var map = L.map("map").setView([51.505, -0.09], 13);
+L.tileLayer("https://tile.openstreetmap.org/%7Bz%7D/%7Bx%7D/%7By%7D.png", {
+  maxZoom: 19,
+  attribution:
+    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+}).addTo(map);
 const setUserLocationOnMap = async (phoneNumber) => {
+  /////call api leaflet
   const userCoords = await userLocation(phoneNumber);
   if (!userCoords) {
     alert("Unable to retrieve user location.");
@@ -173,7 +181,7 @@ const setUserLocationOnMap = async (phoneNumber) => {
       .bindPopup(`Risk: ${riskType}`); // Popup to show the risk type when the circle is clicked
   }
 };
-//setUserLocationOnMap("+33699901040"); //pour test
+setUserLocationOnMap("+33699901032"); //pour test
 
 const searchRisk = async (usertel) => {
   const userLocationValue = await userLocation(usertel);
