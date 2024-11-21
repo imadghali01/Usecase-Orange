@@ -1,4 +1,5 @@
-const authorization = "Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXRyWWNDbEtjRjh1NA==";
+const authorization =
+  "Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXRyWWNDbEtjRjh1NA==";
 const numeroTest = [
   "+33699901031",
   "+33699901032",
@@ -29,7 +30,7 @@ const callToken = async () => {
     }
   );
   const callObject = await callFetch.json();
-  console.log(callObject.access_token); 
+  console.log(callObject.access_token);
   return callObject.access_token;
 };
 
@@ -47,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         numeroTest.push(username);
         //searchRisk(username);
-
       }
     });
   }
@@ -60,7 +60,7 @@ const userLocation = async (numerodeteluser) => {
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIxMTk2NTYsImlhdCI6MTczMjExNjA1NiwianRpIjoiZWFIUmZRN25RMVBjb01zTlRHS2tjVXhXUWJmWm9WR2JocnFQZVF1ck9DVElyWThaNTVlMHVTQm5QSjhFcmViNldDWTFYb3ZqRGM1cVJRTUtLMENPUVdWOUhSdGZwdnJnajBEeiIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIl0sIm1jbyI6IlNFS0FQSSJ9.eXBCohgrUgkYKOR-GeXMrej7hZDl0DoLWVyIz7NZKYYumdGf8HtMJlvXrqNWssInAWTH19y_DIFvmedWTPiBJwLX3ITzDjydSCia2yv_UuFhiX1id9x_BmJ9JaeBGktF"}`,
+          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIxOTU5OTMsImlhdCI6MTczMjE5MjM5MywianRpIjoibzBHTmVObUlYOXoyS2pOTDhvbHFNUGd0TDV0R0lzenB6ZFNIbDZjaktyaTVlUGN3eHVMMzNIb1RJNkN1MERRNldpUm83VFh1NWVia2cwN2ZYN3lZYm9qQTZ4U0U0WHh2cUpHRSIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2Utcm9hbWluZy1zdGF0dXNfb3JhbmdlLWxhYjp2MDphY2Nlc3MiXSwibWNvIjoiU0VLQVBJIn0.W6f_iRt1MRQ9zbjYLh_J3coFfzeIgIc2nZLvX7JcPJQ0UpyXBaoDLHmKWdEOlT0lpndwSh3StS7fL5xPEUcKHq4XWOaMg1WEwrCdbvmVn4ep8b43oCmurmO97P3yRaQk"}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -74,29 +74,85 @@ const userLocation = async (numerodeteluser) => {
     const locationData = await location.json();
 
     console.log(
-      locationData.area.center.longitude+
+      locationData.area.center.longitude +
         "," +
         locationData.area.center.latitude
     );
-    return (
-      `${locationData.area.center.longitude},${locationData.area.center.latitude}`
-    );
+    return `${locationData.area.center.longitude},${locationData.area.center.latitude}`;
   } catch (error) {
     console.error("Erreur lors de la récupération de la position:", error);
     throw error;
   }
 };
+//////////////Placer le user et les risques environnants sur la map//////////////////
+const setUserLocationOnMap = async (phoneNumber) => {
+  const userCoords = await userLocation(phoneNumber);
+  if (!userCoords) {
+    alert("Unable to retrieve user location.");
+    return;
+  }
+
+  const [longitude, latitude] = userCoords.split(",");
+
+  map.setView([latitude, longitude], 13); // Center map on user's location
+  L.marker([latitude, longitude]).addTo(map).bindPopup("You are here!"); //Working up to here
+
+  //postalLonLat gives { dataLongLat, datarisk }
+
+  // Fetch risk data using postalLongLat function
+  const { dataLongLat, datarisk } = await postalLongLat(phoneNumber);
+  if (!dataLongLat || !datarisk) {
+    console.error("No risk data available.");
+    return;
+  }
+
+  // Map risk types to colors
+  const riskColorMapping = {
+    "Inondations et/ou Coulées de Boue": "blue",
+    Sécheresse: "red",
+    "Mouvement de Terrain": "orange",
+    Default: "gray", // Default color if no match
+  };
+
+  // Loop through the risk data and add circles to the map
+  for (let i = 0; i < dataLongLat.length; i++) {
+    const coordinates = dataLongLat[i]; // coordinates is an object with { type: 'Point', coordinates: [longitude, latitude] }
+    const riskType = datarisk[i]; // risk type for this coordinate
+    const color = riskColorMapping[riskType] || riskColorMapping["Default"]; // Default to gray if risk type not found
+
+    console.log(coordinates); // coordinates is an object with { type: 'Point', coordinates: [longitude, latitude] }
+    console.log(riskType); // The type of risk (Inondations, Sécheresse, etc.)
+
+    // Accessing the coordinates array to extract longitude and latitude
+    const [longitude, latitude] = coordinates.coordinates; // coordinates.coordinates is the array [longitude, latitude]
+
+    // Add a circle for each risk area on the map
+    L.circle([latitude, longitude], {
+      // Reverse order of coordinates (lat, lon)
+      color,
+      fillColor: color,
+      fillOpacity: 0.5,
+      radius: 1000, // Adjust the radius as needed (1000 meters)
+    })
+      .addTo(map)
+      .bindPopup(`Risk: ${riskType}`); // Popup to show the risk type when the circle is clicked
+  }
+};
+//setUserLocationOnMap("+33699901040"); //pour test
 
 const searchRisk = async (usertel) => {
   const userLocationValue = await userLocation(usertel);
   let filtereddata = {}; // Un objet vide pour stocker les données formatées
 
-  const testfetch = await fetch(`https://georisques.gouv.fr/api/v1/gaspar/catnat?rayon=10000&page=1&page_size=10&latlon=${userLocationValue}`, {
-    method: 'GET',
-    headers: {
-      "accept": "application/json",
+  const testfetch = await fetch(
+    `https://georisques.gouv.fr/api/v1/gaspar/catnat?rayon=10000&page=1&page_size=10&latlon=${userLocationValue}`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+      },
     }
-  });
+  );
 
   const testreponse = await testfetch.json();
 
@@ -106,7 +162,7 @@ const searchRisk = async (usertel) => {
       // Ajoutez une clé pour chaque libelle_commune
       filtereddata[elem.libelle_commune] = {
         code_insee: elem.code_insee,
-        risque: elem.libelle_risque_jo
+        risque: elem.libelle_risque_jo,
       };
     });
   }
@@ -114,11 +170,12 @@ const searchRisk = async (usertel) => {
   console.log(filtereddata);
   return filtereddata;
 };
+//searchRisk("+33699901036"); //test pour objet
 ////////////////////////////FONCTION POUR TROUVER LES LONG/LAT DES COMMUNES DE SEARCHRISK
 const postalLongLat = async (usertel) => {
   let dataLongLat = [];
   let datarisk = [];
-  
+
   let mydata = await searchRisk(usertel);
 
   for (const item of Object.values(mydata)) {
@@ -143,12 +200,12 @@ const postalLongLat = async (usertel) => {
 }).addTo(map);*/
 ///////////////////////////FONCTION POSTALtoLONGLAT**** A CREER ****POUR UTILISER LE CODE POSTAL DES OBJETS SEARCHRISK
 
-const insee = async () =>{
-    // URL to fetch the lat/lon based on INSEE code and create a circle
+const insee = async () => {
+  // URL to fetch the lat/lon based on INSEE code and create a circle
   //exemple de récupération d'un code INSEE
   //à récupérer dans les API de risque
   //à récupérer dans les API de risque
-  
+
   const latLonInseeURL = `https://geo.api.gouv.fr/communes/${insee}?fields=centre&format=json&geometry=centre`;
 
   // Fetch data and add a circle to the map
@@ -173,8 +230,7 @@ const insee = async () =>{
       circle.bindPopup(`Risques de ${risk} dans cette zone`); //click sur zone bleue pour afficher le risque
     })
     .catch((error) => console.error("Error fetching data:", error));
-}
-
+};
 
 //////////////////////////////////////  Map Leaflet  //////////////////////////////
 //zone de "départ" de l'ouverture de la map dans la div #map = Paris
@@ -189,8 +245,8 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 var circle = L.circle([48.86664, 2.333222], {
   ////////////////////////REMPLACER LES LONGLAT PAR CELLES DONNEES PAR POSTALtoLONGLAT
   color: "red", //couleur au choix ici border
-  fillColor: "#f03",
-  fillOpacity: 0.5,
+  fillColor: "red",
+  fillOpacity: 0.2,
   radius: 500, //500m
 }).addTo(map);
 
