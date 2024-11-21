@@ -199,13 +199,13 @@ const postalLongLat = async (usertel) => {
   radius: 1000, // jusque 10km de rayon
 }).addTo(map);*/
 ///////////////////////////FONCTION POSTALtoLONGLAT**** A CREER ****POUR UTILISER LE CODE POSTAL DES OBJETS SEARCHRISK
-
-const insee = async () => {
-  // URL to fetch the lat/lon based on INSEE code and create a circle
+/*
+const insee = async () =>{
+    // URL to fetch the lat/lon based on INSEE code and create a circle
   //exemple de récupération d'un code INSEE
   //à récupérer dans les API de risque
   //à récupérer dans les API de risque
-
+  
   const latLonInseeURL = `https://geo.api.gouv.fr/communes/${insee}?fields=centre&format=json&geometry=centre`;
 
   // Fetch data and add a circle to the map
@@ -230,7 +230,8 @@ const insee = async () => {
       circle.bindPopup(`Risques de ${risk} dans cette zone`); //click sur zone bleue pour afficher le risque
     })
     .catch((error) => console.error("Error fetching data:", error));
-};
+}
+
 
 //////////////////////////////////////  Map Leaflet  //////////////////////////////
 //zone de "départ" de l'ouverture de la map dans la div #map = Paris
@@ -245,11 +246,11 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 var circle = L.circle([48.86664, 2.333222], {
   ////////////////////////REMPLACER LES LONGLAT PAR CELLES DONNEES PAR POSTALtoLONGLAT
   color: "red", //couleur au choix ici border
-  fillColor: "red",
-  fillOpacity: 0.2,
+  fillColor: "#f03",
+  fillOpacity: 0.5,
   radius: 500, //500m
 }).addTo(map);
-
+*/
 /////////////////////LA LOGIQUE DANS L ORDRE ////////////////////////
 
 /*
