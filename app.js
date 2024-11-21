@@ -64,7 +64,7 @@ const isInRoaming = async (numerodeteluser) => {
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${await callToken()}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -95,7 +95,7 @@ const userLocation = async (numerodeteluser) => {
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${await callToken()}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
