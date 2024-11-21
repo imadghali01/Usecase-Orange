@@ -1,5 +1,8 @@
 const authorization ="Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXRyWWNDbEtjRjh1NA==";
 const token ="eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIyMDEwNTYsImlhdCI6MTczMjE5NzQ1NiwianRpIjoiUm5FNURLZGJOMXhFcHBlRmpEaE1QanFSeDBTS1ZjZmdyanVrTDEzcER1S0tRR1hDNzR0dkxvNjdFOVZnRTNOektSYmt5UllsdVRlVXRGeFJFaWI0UGZTeVVSS3R5SGlDdXdUWCIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2Utcm9hbWluZy1zdGF0dXNfb3JhbmdlLWxhYjp2MDphY2Nlc3MiXSwibWNvIjoiU0VLQVBJIn0.PwOo5b1UU0gi9nTxrGHLy762HQKOtyAk_DtjuFCgRFbqd__rs_sjRNZtQoozKv_7eWAc9PPj_l7qOMzeOzh8wmL39DU0HGi1xLE_Muv9q7-l6sPV3BG3Q-yyV-SIyRGp";
+const closer = document.querySelector('.closer');
+const loginreopen = document.querySelector('.login');
+const modalsign = document.querySelector('.modalSign');
 const numeroTest = [
   "+33699901031",
   "+33699901032",
@@ -36,7 +39,7 @@ const callToken = async () => {
 document.addEventListener("DOMContentLoaded", () => {
   const loginButton = document.querySelector(".signContainer button");
   const numerotelInput = document.querySelector("#user");
-  const modalsign = document.querySelector('.modalSign');
+  
   if (loginButton && numerotelInput) {
     loginButton.addEventListener("click", async (event) => {
       const telNumber = numerotelInput.value.trim();
@@ -235,4 +238,9 @@ const postalLongLat = async (usertel) => {
 
   return { dataLongLat, datarisk };
 };
-
+loginreopen.addEventListener('click', () => {
+  modalsign.style.display ='block';
+})
+closer.addEventListener('click', () => {
+  modalsign.style.display ='none';
+})
