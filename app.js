@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
 const userLocation = async (numerodeteluser) => {
   try {
     const location = await fetch(
@@ -117,28 +118,37 @@ const searchRisk = async (usertel) => {
 const postalLongLat = async (usertel) => {
   let dataLongLat = [];
   let datarisk = [];
+  
   let mydata = await searchRisk(usertel);
-  // Parcourez les valeurs de l'objet `data`
-  Object.values(mydata).forEach((item, index) => {
+
+  for (const item of Object.values(mydata)) {
     if (item.code_insee) {
-      dataLongLat.push(item.code_insee);
+      const response = await fetch(
+        `https://geo.api.gouv.fr/communes/${item.code_insee}?fields=centre&format=json&geometry=centre`
+      );
+      const jsonData = await response.json();
+      dataLongLat.push(jsonData.centre);
       datarisk.push(item.risque);
-    } else {
-      console.error(`L'objet à l'index ${index} ne contient pas de code_insee`);
     }
-  });
-  console.log(dataLongLat,datarisk)
+  }
+
   return { dataLongLat, datarisk };
 };
 
+/*const circle = L.circle([lat, lon], {
+  color: "blue",
+  fillColor: "#add8e6",
+  fillOpacity: 0.5,
+  radius: 1000, // jusque 10km de rayon
+}).addTo(map);*/
 ///////////////////////////FONCTION POSTALtoLONGLAT**** A CREER ****POUR UTILISER LE CODE POSTAL DES OBJETS SEARCHRISK
 
-/*const insee = async () =>{
+const insee = async () =>{
     // URL to fetch the lat/lon based on INSEE code and create a circle
   //exemple de récupération d'un code INSEE
-  let insee = await postalLongLat("+33699901032")[0]; //à récupérer dans les API de risque
   //à récupérer dans les API de risque
-  insee.forEach
+  //à récupérer dans les API de risque
+  
   const latLonInseeURL = `https://geo.api.gouv.fr/communes/${insee}?fields=centre&format=json&geometry=centre`;
 
   // Fetch data and add a circle to the map
@@ -185,7 +195,7 @@ var circle = L.circle([48.86664, 2.333222], {
 }).addTo(map);
 
 /////////////////////LA LOGIQUE DANS L ORDRE ////////////////////////
-*/
+
 /*
 - USERLOCATION  need CALLTOKEN
 - SEARCHRISK=> a besoin d une LONGLAT pour fonctionner et appel pour ce faire USERLOCATION
