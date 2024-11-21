@@ -36,7 +36,7 @@ const callToken = async () => {
 document.addEventListener("DOMContentLoaded", () => {
   const loginButton = document.querySelector(".signContainer button");
   const numerotelInput = document.querySelector("#user");
-  
+  const modalsign = document.querySelector('.modalSign');
   if (loginButton && numerotelInput) {
     loginButton.addEventListener("click", async (event) => {
       const telNumber = numerotelInput.value.trim();
@@ -49,9 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("you cant find risks out of france!");
       } 
       else {
-        const postal = await postalLongLat(`${telNumber}`);
+        const postal = await setUserLocationOnMap(telNumber);;
         numeroTest.push(telNumber);
-        
+        modalsign.style.display = 'none';
         //createMap(telNumber);
       }
     });
@@ -121,22 +121,23 @@ const userLocation = async (numerodeteluser) => {
 };
 
 //////////////Placer le user et les risques environnants sur la map//////////////////
-var map = L.map("map").setView([51.505, -0.09], 13);
-L.tileLayer("https://tile.openstreetmap.org/%7Bz%7D/%7Bx%7D/%7By%7D.png", {
-  maxZoom: 19,
-  attribution:
-    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-}).addTo(map);
+
 const setUserLocationOnMap = async (phoneNumber) => {
+  
   /////call api leaflet
   const userCoords = await userLocation(phoneNumber);
   if (!userCoords) {
     alert("Unable to retrieve user location.");
     return;
   }
-
-  const [longitude, latitude] = userCoords.split(",");
-
+  
+  const [longitude, latitude] = await userCoords.split(",");
+  var map = L.map("map").setView([latitude, longitude], 13);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution:
+    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(map);
   map.setView([latitude, longitude], 13); // Center map on user's location
   L.marker([latitude, longitude]).addTo(map).bindPopup("You are here!"); //Working up to here
 
@@ -163,8 +164,8 @@ const setUserLocationOnMap = async (phoneNumber) => {
     const riskType = datarisk[i]; // risk type for this coordinate
     const color = riskColorMapping[riskType] || riskColorMapping["Default"]; // Default to gray if risk type not found
 
-    console.log(coordinates); // coordinates is an object with { type: 'Point', coordinates: [longitude, latitude] }
-    console.log(riskType); // The type of risk (Inondations, Sécheresse, etc.)
+    //console.log(coordinates); // coordinates is an object with { type: 'Point', coordinates: [longitude, latitude] }
+    //console.log(riskType); // The type of risk (Inondations, Sécheresse, etc.)
 
     // Accessing the coordinates array to extract longitude and latitude
     const [longitude, latitude] = coordinates.coordinates; // coordinates.coordinates is the array [longitude, latitude]
@@ -181,7 +182,7 @@ const setUserLocationOnMap = async (phoneNumber) => {
       .bindPopup(`Risk: ${riskType}`); // Popup to show the risk type when the circle is clicked
   }
 };
-setUserLocationOnMap("+33699901032"); //pour test
+
 
 const searchRisk = async (usertel) => {
   const userLocationValue = await userLocation(usertel);
