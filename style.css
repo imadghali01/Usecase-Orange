@@ -4,6 +4,7 @@
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
+  font-family: Helvetica, sans-serif;
 }
 body {
   width: 100%;
@@ -72,10 +73,10 @@ footer {
   background: #141517;
   height: 120px;
 }
-footer .title span{
+footer .title span {
   transform: translateY(-10px);
 }
-footer .title{
+footer .title {
   transform: translateX(50px);
 }
 section {
@@ -127,7 +128,6 @@ section li img {
   border-radius: 50%;
   background-color: black;
   color: white;
-  
 }
 #box {
   align-self: flex-start;
