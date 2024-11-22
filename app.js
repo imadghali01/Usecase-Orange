@@ -183,7 +183,7 @@ const setUserLocationOnMap = async (phoneNumber) => {
       radius: 1000, // Adjust the radius as needed (1000 meters)
     })
       .addTo(map)
-      .bindPopup(`Risk: ${riskType}`); // Popup to show the risk type when the circle is clicked
+      .bindPopup(`Risque: ${riskType}`); // Popup to show the risk type when the circle is clicked
   }
 };
 
@@ -234,7 +234,7 @@ const postalLongLat = async (usertel) => {
       const jsonData = await response.json();
       dataLongLat.push(jsonData.centre);
       datarisk.push(item.risque);
-      if(await userLocation(usertel) == jsonData.centre){
+      if(mydata.userLocationValue == jsonData.centre){
         alert(`Attention you are in a ${item.risk} risk area`);
         main.style.background = 'red';
       }
