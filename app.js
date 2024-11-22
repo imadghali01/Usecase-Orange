@@ -54,9 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } 
       else {
         const postal = await setUserLocationOnMap(telNumber);
-        numeroTest.push(telNumber);
         modalsign.style.display = 'none';
-        //createMap(telNumber);
       }
     });
   }
