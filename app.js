@@ -3,6 +3,7 @@ const token ="eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1Rk
 const closer = document.querySelector('.closer');
 const loginreopen = document.querySelector('.login');
 const modalsign = document.querySelector('.modalSign');
+const main = document.querySelector('main');
 const numeroTest = [
   "+33699901031",
   "+33699901032",
@@ -52,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("you cant find risks out of france!");
       } 
       else {
-        const postal = await setUserLocationOnMap(telNumber);;
+        const postal = await setUserLocationOnMap(telNumber);
         numeroTest.push(telNumber);
         modalsign.style.display = 'none';
         //createMap(telNumber);
@@ -233,6 +234,10 @@ const postalLongLat = async (usertel) => {
       const jsonData = await response.json();
       dataLongLat.push(jsonData.centre);
       datarisk.push(item.risque);
+      if(await userLocation(usertel) == jsonData.centre){
+        alert(`Attention you are in a ${item.risk} risk area`);
+        main.style.background = 'red';
+      }
     }
   }
 
