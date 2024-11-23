@@ -50,11 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       else if(isInRoaming(telNumber) == true){
-        alert("you cant find risks out of france!");
+        alert("you can't find risks out of france!");
       } 
       else {
-        const postal = await setUserLocationOnMap(telNumber);
         modalsign.style.display = 'none';
+        const postal = await setUserLocationOnMap(telNumber);
       }
     });
   }
@@ -238,7 +238,7 @@ const postalLongLat = async (usertel) => {
       }
     }
   }
-
+  console.log(dataLongLat, datarisk);
   return { dataLongLat, datarisk };
 };
 loginreopen.addEventListener('click', () => {

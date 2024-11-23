@@ -74,10 +74,10 @@ footer {
   height: 120px;
 }
 footer .title span {
-  transform: translateY(-10px);
+  transform: translateY(-20px);
 }
 footer .title {
-  transform: translateX(50px);
+  transform: translateX(45px);
 }
 section {
   height: auto;
