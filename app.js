@@ -1,9 +1,7 @@
-const authorization ="Basic M3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUo6R2EwTXRyWWNDbEtjRjh1NA==";
-const token ="eyJ0eXAiOiJKV1QiLCJ2ZXIiOiIxLjAiLCJhbGciOiJFUzM4NCIsImtpZCI6Ikg1RkdUNXhDUlJWU0NseG5vTXZCWEtUM1AyckhTRVZUNV9VdE16UFdCYTQifQ.eyJpc3MiOiJodHRwczovL2FwaS5vcmFuZ2UuY29tL29hdXRoL3YzIiwiYXVkIjpbIm9wZSJdLCJleHAiOjE3MzIyMDEwNTYsImlhdCI6MTczMjE5NzQ1NiwianRpIjoiUm5FNURLZGJOMXhFcHBlRmpEaE1QanFSeDBTS1ZjZmdyanVrTDEzcER1S0tRR1hDNzR0dkxvNjdFOVZnRTNOektSYmt5UllsdVRlVXRGeFJFaWI0UGZTeVVSS3R5SGlDdXdUWCIsImNsaWVudF9pZCI6IjN1WkdCY0xuQVFqTzd6WnhKWHlOMWhpZVRNR2FzU01KIiwic3ViIjoiM3VaR0JjTG5BUWpPN3paeEpYeU4xaGllVE1HYXNTTUoiLCJjbGllbnRfbmFtZSI6eyJkZWZhdWx0IjoiR1JUIn0sImNsaWVudF90YWciOiJ0N1VRZU84OHg5SGFOVkEzIiwic2NvcGUiOlsib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tdmVyaWZpY2F0aW9uX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9nZW9mZW5jaW5nX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2UtbG9jYXRpb24tcmV0cmlldmFsX29yYW5nZS1sYWI6djA6YWNjZXNzIiwib3BlOmNhbWFyYV9kZXZpY2Utcm9hbWluZy1zdGF0dXNfb3JhbmdlLWxhYjp2MDphY2Nlc3MiXSwibWNvIjoiU0VLQVBJIn0.PwOo5b1UU0gi9nTxrGHLy762HQKOtyAk_DtjuFCgRFbqd__rs_sjRNZtQoozKv_7eWAc9PPj_l7qOMzeOzh8wmL39DU0HGi1xLE_Muv9q7-l6sPV3BG3Q-yyV-SIyRGp";
-const closer = document.querySelector('.closer');
-const loginreopen = document.querySelector('.login');
-const modalsign = document.querySelector('.modalSign');
-const main = document.querySelector('main');
+const closer = document.querySelector(".closer");
+const loginreopen = document.querySelector(".login");
+const modalsign = document.querySelector(".modalSign");
+const main = document.querySelector("main");
 const numeroTest = [
   "+33699901031",
   "+33699901032",
@@ -17,7 +15,6 @@ const numeroTest = [
   "+33699901040",
 ];
 let hasSearched = 0;
-
 
 ////CALL TOKEN
 const callToken = async () => {
@@ -40,7 +37,7 @@ const callToken = async () => {
 document.addEventListener("DOMContentLoaded", () => {
   const loginButton = document.querySelector(".signContainer button");
   const numerotelInput = document.querySelector("#user");
-  
+
   if (loginButton && numerotelInput) {
     loginButton.addEventListener("click", async (event) => {
       const telNumber = numerotelInput.value.trim();
@@ -48,12 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("tel number is mandatory!");
         numerotelInput.focus();
         return;
-      }
-      else if(isInRoaming(telNumber) == true){
+      } else if (isInRoaming(telNumber) == true) {
         alert("you can't find risks out of france!");
-      } 
-      else {
-        modalsign.style.display = 'none';
+      } else {
+        modalsign.style.display = "none";
         const postal = await setUserLocationOnMap(telNumber);
       }
     });
@@ -79,12 +74,8 @@ const isInRoaming = async (numerodeteluser) => {
 
     const locationData = await location.json();
 
-    console.log(
-      locationData.roaming
-    );
-    return (
-      `${locationData.roaming}`
-    );
+    console.log(locationData.roaming);
+    return `${locationData.roaming}`;
   } catch (error) {
     console.error("Erreur lors de la récupération de la position:", error);
     throw error;
@@ -125,20 +116,19 @@ const userLocation = async (numerodeteluser) => {
 //////////////Placer le user et les risques environnants sur la map//////////////////
 
 const setUserLocationOnMap = async (phoneNumber) => {
-  
   /////call api leaflet
   const userCoords = await userLocation(phoneNumber);
   if (!userCoords) {
     alert("Unable to retrieve user location.");
     return;
   }
-  
+
   const [longitude, latitude] = await userCoords.split(",");
   var map = L.map("map").setView([latitude, longitude], 13);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution:
-    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 19,
+    attribution:
+      '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
   map.setView([latitude, longitude], 13); // Center map on user's location
   L.marker([latitude, longitude]).addTo(map).bindPopup("You are here!"); //Working up to here
@@ -184,7 +174,6 @@ const setUserLocationOnMap = async (phoneNumber) => {
       .bindPopup(`Risque: ${riskType}`); // Popup to show the risk type when the circle is clicked
   }
 };
-
 
 const searchRisk = async (usertel) => {
   const userLocationValue = await userLocation(usertel);
@@ -232,18 +221,18 @@ const postalLongLat = async (usertel) => {
       const jsonData = await response.json();
       dataLongLat.push(jsonData.centre);
       datarisk.push(item.risque);
-      if(mydata.userLocationValue == jsonData.centre){
+      if (mydata.userLocationValue == jsonData.centre) {
         alert(`Attention you are in a ${item.risk} risk area`);
-        main.style.background = 'red';
+        main.style.background = "red";
       }
     }
   }
   console.log(dataLongLat, datarisk);
   return { dataLongLat, datarisk };
 };
-loginreopen.addEventListener('click', () => {
-  modalsign.style.display ='block';
-})
-closer.addEventListener('click', () => {
-  modalsign.style.display ='none';
-})
+loginreopen.addEventListener("click", () => {
+  modalsign.style.display = "block";
+});
+closer.addEventListener("click", () => {
+  modalsign.style.display = "none";
+});
