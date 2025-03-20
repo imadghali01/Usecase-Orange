@@ -77,7 +77,7 @@ const isInRoaming = async (numerodeteluser) => {
     console.log(locationData.roaming);
     return `${locationData.roaming}`;
   } catch (error) {
-    console.error("Erreur lors de la récupération de la position:", error);
+    console.error("Error retrieving position:", error);
     throw error;
   }
 };
@@ -108,15 +108,15 @@ const userLocation = async (numerodeteluser) => {
     );
     return `${locationData.area.center.longitude},${locationData.area.center.latitude}`;
   } catch (error) {
-    console.error("Erreur lors de la récupération de la position:", error);
+    console.error("Error retrieving position:", error);
     throw error;
   }
 };
 
-//////////////Placer le user et les risques environnants sur la map//////////////////
+//////////////Place the user and surrounding risks on the map//////////////////
 
 const setUserLocationOnMap = async (phoneNumber) => {
-  /////call api leaflet
+  /////Call Leaflet API
   const userCoords = await userLocation(phoneNumber);
   if (!userCoords) {
     alert("Unable to retrieve user location.");
@@ -131,9 +131,9 @@ const setUserLocationOnMap = async (phoneNumber) => {
       '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
   map.setView([latitude, longitude], 13); // Center map on user's location
-  L.marker([latitude, longitude]).addTo(map).bindPopup("You are here!"); //Working up to here
+  L.marker([latitude, longitude]).addTo(map).bindPopup("You are here!"); // Working up to here
 
-  //postalLonLat gives { dataLongLat, datarisk }
+  // postalLongLat gives { dataLongLat, datarisk }
 
   // Fetch risk data using postalLongLat function
   const { dataLongLat, datarisk } = await postalLongLat(phoneNumber);
@@ -156,8 +156,8 @@ const setUserLocationOnMap = async (phoneNumber) => {
     const riskType = datarisk[i]; // risk type for this coordinate
     const color = riskColorMapping[riskType] || riskColorMapping["Default"]; // Default to gray if risk type not found
 
-    //console.log(coordinates); // coordinates is an object with { type: 'Point', coordinates: [longitude, latitude] }
-    //console.log(riskType); // The type of risk (Inondations, Sécheresse, etc.)
+    // console.log(coordinates); // coordinates is an object with { type: 'Point', coordinates: [longitude, latitude] }
+    // console.log(riskType); // The type of risk (Floods, Drought, etc.)
 
     // Accessing the coordinates array to extract longitude and latitude
     const [longitude, latitude] = coordinates.coordinates; // coordinates.coordinates is the array [longitude, latitude]
@@ -177,7 +177,7 @@ const setUserLocationOnMap = async (phoneNumber) => {
 
 const searchRisk = async (usertel) => {
   const userLocationValue = await userLocation(usertel);
-  let filtereddata = {}; // Un objet vide pour stocker les données formatées
+  let filtereddata = {}; // An empty object to store the formatted data
 
   const testfetch = await fetch(
     `https://georisques.gouv.fr/api/v1/gaspar/catnat?rayon=10000&page=1&page_size=10&latlon=${userLocationValue}`,
@@ -191,10 +191,10 @@ const searchRisk = async (usertel) => {
 
   const testreponse = await testfetch.json();
 
-  // Vérifiez si les données existent
+  // Check if the data exists
   if (testreponse && testreponse.data) {
     testreponse.data.forEach((elem) => {
-      // Ajoutez une clé pour chaque libelle_commune
+      // Add a key for each municipality (libelle_commune)
       filtereddata[elem.libelle_commune] = {
         code_insee: elem.code_insee,
         risque: elem.libelle_risque_jo,
@@ -205,8 +205,8 @@ const searchRisk = async (usertel) => {
   console.log(filtereddata);
   return filtereddata;
 };
-//searchRisk("+33699901036"); //test pour objet
-////////////////////////////FONCTION POUR TROUVER LES LONG/LAT DES COMMUNES DE SEARCHRISK
+// searchRisk("+33699901036"); // test for object
+//////////////////////////// FUNCTION TO FIND THE LONG/LAT OF MUNICIPALITIES FOR searchRisk ////////////////////////////
 const postalLongLat = async (usertel) => {
   let dataLongLat = [];
   let datarisk = [];
@@ -236,3 +236,4 @@ loginreopen.addEventListener("click", () => {
 closer.addEventListener("click", () => {
   modalsign.style.display = "none";
 });
+
